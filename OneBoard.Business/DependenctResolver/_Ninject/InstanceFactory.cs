@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using OneBoard.Business.DependenctResolver._Ninject;
 using System;
 using System.Collections.Generic;
 using System.Text;
