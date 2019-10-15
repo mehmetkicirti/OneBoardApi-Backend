@@ -75,9 +75,24 @@ namespace OneBoard.Core.DataAccess.EntityFramework
 
         #region Async
 
-        public Task UpdateAsync(TEntity entity)
+        public virtual async Task UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            using(var context=new TContext())
+            {
+                try
+                {
+                    var updateEntity = context.Entry(entity);
+                    updateEntity.State = EntityState.Modified;
+                    await context.SaveChangesAsync();
+                }
+
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+
+
+            }
         }
         public virtual async Task AddAsync(TEntity entity)
         {
@@ -115,9 +130,23 @@ namespace OneBoard.Core.DataAccess.EntityFramework
                 }
             }
         }
-        public Task DeleteAsync(TEntity entity)
+        public virtual async Task DeleteAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                try
+                {
+                  
+                    var DeleteEntity = context.Entry(entity);
+                    DeleteEntity.State = EntityState.Deleted;
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+
+                    throw new Exception(e.Message);
+                }
+            }
         } 
         #endregion
     }
