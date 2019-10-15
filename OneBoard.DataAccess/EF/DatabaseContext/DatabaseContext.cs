@@ -19,6 +19,7 @@ namespace OneBoard.DataAccess.EF.DatabaseContext
         //    base.OnModelCreating(modelBuilder);
         //    modelBuilder.Entity<DataSource>().HasMany(w=>w.Widgets).WithRequired().WillCascadeOnDelete(false);
         //}
+        
         public DbSet<ChartType> ChartTypes { get; set; }
         public DbSet<User> Users{ get; set; }
         public DbSet<UserFirm> UserFirms{ get; set; }
