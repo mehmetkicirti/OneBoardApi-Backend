@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ninject.Modules;
+using OneBoard.Business.Abstract;
+using OneBoard.Business.Concrete;
 using OneBoard.DataAccess.Abstract;
 using OneBoard.DataAccess.EF;
-using OneBoard.DataAccess.EF.DatabaseContext;
+using OneBoard.DataAccess.EF._DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,8 +16,8 @@ namespace OneBoard.Business.DependenctResolver._Ninject
         public override void Load()
         {
             Bind<IUserDal>().To<EfUserDal>();
-            Bind<IUserFirmDal>().To<EfUserFirmDal>();
-            Bind<IUserGroupDal>().To<EfUserGroupDal>();
+            Bind<DataAccess.Abstract.IUserFirmDal>().To<EfUserFirmDal>();
+            Bind<DataAccess.Abstract.IUserGroupDal>().To<EfUserGroupDal>();
             Bind<IGroupDal>().To<EfGroupDal>();
             Bind<IFirmDal>().To<EfFirmDal>();
             Bind<IDashboardDal>().To<EfDashboardDal>();
@@ -26,7 +28,11 @@ namespace OneBoard.Business.DependenctResolver._Ninject
             Bind<IChartTypeDal>().To<EfChartTypeDal>();
             Bind<ISerieDal>().To<EfSerieDal>();
 
-            Bind<DbContext>().To<DatabaseContext>();
+            Bind<IUserService>().To<UserManager>();
+            Bind<IGroupService>().To<GroupManager>();
+            Bind<IFirmService>().To<FirmManager>();
+
+            //Bind<DbContext>().To<DatabaseContext>();
 
         }
     }

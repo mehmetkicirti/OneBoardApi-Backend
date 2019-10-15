@@ -22,6 +22,9 @@ namespace OneBoard.Core.DataAccess.EntityFramework
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
                 context.SaveChanges();
+
+                
+                
             }
         }
 
@@ -56,20 +59,38 @@ namespace OneBoard.Core.DataAccess.EntityFramework
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+            using(var context=new TContext())
+            {
+                return context.Set<TEntity>().SingleOrDefault(filter);
+                  
+            }
         }
 
-        public IQueryable<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public IQueryable<TEntity> GetListByQueryable(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
-                return context.Set<TEntity>().Where(filter);
+                return filter != null ? context.Set<TEntity>().Where(filter) :
+                    context.Set<TEntity>();
+            }
+        }
+
+        public IList<TEntity> GetList(Expression<Func<TEntity,bool>> filter = null)
+        {
+            using(var context = new TContext())
+            {
+                return context.Set<TEntity>().ToList();
             }
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            using(var context=new TContext())
+            {
+                var UpdateEntity = context.Entry(entity);
+                UpdateEntity.State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
 

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OneBoard.DataAccess.EF.DatabaseContext
+namespace OneBoard.DataAccess.EF._DatabaseContext
 {
     public class DatabaseContext:DbContext
     {
@@ -12,7 +12,8 @@ namespace OneBoard.DataAccess.EF.DatabaseContext
         //To add migrations =>you should do at the following steps=> 1. Open CMD => 2.dotnet ef migrations add "..." => 3. dotnet ef database update .. 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-7DBO8O5\SQLEXPRESS;Database=OneBoardV2;User ID=kullanici;Password=1234;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            //optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-7DBO8O5\SQLEXPRESS;Database=OneBoardV2;User ID=kullanici;Password=1234;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(connectionString: @"Data Source=DESKTOP-BFT7NEM\SQLEXPRESS;Database=OneBoardV2;Trusted_Connection=true");
         }
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
