@@ -26,7 +26,7 @@ namespace OneBoard.Business.DependenctResolver._Ninject
             Bind<IChartTypeDal>().To<EfChartTypeDal>();
             Bind<ISerieDal>().To<EfSerieDal>();
 
-            Bind<DbContext>().To<DatabaseContext>();
+            //Bind<DbContext>().To<DatabaseContext>();
 
         }
     }
