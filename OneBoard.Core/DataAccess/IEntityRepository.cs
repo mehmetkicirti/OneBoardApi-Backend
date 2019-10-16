@@ -14,7 +14,9 @@ namespace OneBoard.Core.DataAccess
     {
         TEntity Get(Expression<Func<TEntity, bool>> filter);
         //nullable field
-        IQueryable<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null);
+        IQueryable<TEntity> GetListByQueryable(Expression<Func<TEntity, bool>> filter = null);
+
+        IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null);
         void Add(TEntity entity);
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);

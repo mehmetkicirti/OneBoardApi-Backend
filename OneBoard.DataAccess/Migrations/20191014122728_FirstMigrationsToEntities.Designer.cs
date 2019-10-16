@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OneBoard.DataAccess.EF.DatabaseContext;
+using OneBoard.DataAccess.EF._DatabaseContext;
 
 namespace OneBoard.DataAccess.Migrations
 {
