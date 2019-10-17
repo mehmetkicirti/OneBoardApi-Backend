@@ -1,4 +1,5 @@
-﻿using OneBoard.Core.Utilities.Results.Abstract;
+﻿using OneBoard.Core.Business;
+using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -6,14 +7,7 @@ using System.Text;
 
 namespace OneBoard.Business.Abstract
 {
-    public interface IGroupService
+    public interface IGroupService:IService<Group>
     {
-        IResult Add(Group group);
-
-        IResult Delete(Group group);
-
-        IResult Update(Group group);
-
-        IDataResult<List<Group>> GetGroups();
     }
 }

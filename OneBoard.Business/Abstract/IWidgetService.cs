@@ -1,4 +1,5 @@
-﻿using OneBoard.Core.Utilities.Results.Abstract;
+﻿using OneBoard.Core.Business;
+using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -6,14 +7,7 @@ using System.Text;
 
 namespace OneBoard.Business.Abstract
 {
-    public interface IWidgetService
+    public interface IWidgetService:IService<Widget>
     {
-        IResult Add(Widget widget);
-
-        IResult Update(Widget widget);
-
-        IResult Delete(Widget widget);
-
-        IDataResult<List<Widget>> GetWidgets();
     }
 }
