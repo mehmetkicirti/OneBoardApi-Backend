@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OneBoard.Business.Abstract
 {
-    public interface IUserGroupDal:IService<UserGroup>
+    public interface IUserGroupService:IService<UserGroup>
     {
     }
 }

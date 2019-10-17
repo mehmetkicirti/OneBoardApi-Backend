@@ -14,35 +14,34 @@ namespace OneBoard.Business.Concrete
 {
     public class GroupManager : IGroupService
     {
-
-        public IGroupDal _dal;
-
-        public GroupManager(IGroupDal dal)
+        public IResult Add(Group entity)
         {
-            this._dal = dal;
-        }
-        public IResult Add(Group group)
-        {
-            _dal.Add(group);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);
+            throw new NotImplementedException();
         }
 
-        public IResult Delete(Group group)
+        public IResult Delete(Group entity)
         {
-            _dal.Delete(group);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
+            throw new NotImplementedException();
         }
 
-        public IDataResult<List<Group>> GetGroups()
+        public IDataResult<Group> GetById(int Id)
         {
-
-            return new SuccessDataResult<List<Group>>(_dal.GetList().ToList(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
+            throw new NotImplementedException();
         }
 
-        public IResult Update(Group group)
+        public IDataResult<IQueryable<Group>> GetEntityQueryable()
         {
-            _dal.Update(group);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<Group>> GetEntityValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult Update(Group entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

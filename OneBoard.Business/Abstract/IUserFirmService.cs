@@ -6,8 +6,7 @@ using System.Text;
 
 namespace OneBoard.Business.Abstract
 {
-    public interface IUserFirmDal:IService<UserFirm>
+    public interface IUserFirmService:IService<UserFirm>
     {
-
     }
 }
