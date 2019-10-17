@@ -14,21 +14,14 @@ namespace OneBoard.Business.Concrete
 {
     public class GroupManager : IGroupService
     {
-<<<<<<< HEAD
-
-        private readonly IGroupDal _dal;
+        public IGroupDal _dal;
 
         public GroupManager(IGroupDal dal)
-=======
-        public IResult Add(Group entity)
->>>>>>> fdcf9a89e3bf289ffb2852ed38a3c11f0e85db8a
         {
-            throw new NotImplementedException();
+            this._dal = dal;
         }
-
-        public IResult Delete(Group entity)
+        public IResult Add(Group group)
         {
-<<<<<<< HEAD
 
             try
             {
@@ -40,21 +33,17 @@ namespace OneBoard.Business.Concrete
             {
                 return new FailResult(e.Message);
             }
-=======
-            throw new NotImplementedException();
->>>>>>> fdcf9a89e3bf289ffb2852ed38a3c11f0e85db8a
         }
 
-        public IDataResult<Group> GetById(int Id)
+        public IResult Delete(Group group)
         {
-<<<<<<< HEAD
             try
             {
                 _dal.Delete(group);
                 return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new FailResult(e.Message);
             }
@@ -64,10 +53,10 @@ namespace OneBoard.Business.Concrete
         {
             try
             {
-                return new SuccessDataResult<Group>(_dal.Get(filter: f => f.ID == Id),BasicCrudOperationMessages.SUCCESS_ADD);
+                return new SuccessDataResult<Group>(_dal.Get(filter: f => f.ID == Id), BasicCrudOperationMessages.SUCCESS_ADD);
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
 
                 return new FailDataResult<Group>(e.Message);
@@ -102,7 +91,7 @@ namespace OneBoard.Business.Concrete
             }
         }
 
-  
+
 
         public IResult Update(Group group)
         {
@@ -112,29 +101,13 @@ namespace OneBoard.Business.Concrete
                 return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new FailResult(e.Message);
             }
-            
-=======
-            throw new NotImplementedException();
-        }
 
-        public IDataResult<IQueryable<Group>> GetEntityQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<List<Group>> GetEntityValues()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IResult Update(Group entity)
-        {
-            throw new NotImplementedException();
->>>>>>> fdcf9a89e3bf289ffb2852ed38a3c11f0e85db8a
         }
     }
+
+
 }

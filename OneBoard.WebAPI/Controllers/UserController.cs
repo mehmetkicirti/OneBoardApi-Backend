@@ -64,7 +64,7 @@ namespace OneBoard.WebAPI.Controllers
         [HttpGet(template:"GetAll")]
         public IActionResult GetAll()
         {
-            var result = service.GetUsers();
+            var result = service.GetEntityValues();
 
             if (result.Success)
             {

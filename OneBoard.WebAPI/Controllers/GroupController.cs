@@ -63,7 +63,7 @@ namespace OneBoard.WebAPI.Controllers
         [HttpGet(template: "GetAll")]
         public IActionResult GetAll()
         {
-            var result = _service.GetGroups();
+            var result = _service.GetEntityValues();
 
             if (result.Success)
             {

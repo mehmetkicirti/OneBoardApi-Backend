@@ -6,15 +6,15 @@ namespace OneBoard.Business.Constants
 {
     public static class BasicCrudOperationMessages
     {
-<<<<<<< HEAD
+
 
         
        
 
-        public static string SUCCESS_ADD = "SUCCESS_ADD";
-=======
-        public static string SUCCESS_ADD = "Successfully added the entity";
->>>>>>> fdcf9a89e3bf289ffb2852ed38a3c11f0e85db8a
+      
+
+        public static string SUCCESS_ADD= "Successfully added the entity";
+
 
         public static string SUCCESS_UPDATE = "Successfully updated the entity";
 
