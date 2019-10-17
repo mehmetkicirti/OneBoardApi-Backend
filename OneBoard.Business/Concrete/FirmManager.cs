@@ -23,25 +23,85 @@ namespace OneBoard.Business.Concrete
         }
         public IResult Add(Firm firm)
         {
-            _dal.Add(firm);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);
+            try
+            {
+                _dal.Add(firm);
+                return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);
+            }
+
+            catch(Exception e)
+            {
+                return new FailResult(e.Message);
+            }
+           
         }
 
         public IResult Delete(Firm firm)
         {
-            _dal.Delete(firm);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
+            try
+            {
+                _dal.Delete(firm);
+                return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
+            }
+
+            catch(Exception e)
+            {
+                return new FailResult(e.Message);
+            }
         }
 
-        public IDataResult<List<Firm>> GetFirm()
+        public IDataResult<Firm> GetById(int Id)
         {
-            return new SuccessDataResult<List<Firm>>(_dal.GetList().ToList(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
+            try
+            {
+                return new SuccessDataResult<Firm>(_dal.Get(f => f.ID == Id), BasicCrudOperationMessages.SUCCESS_GET_ID);
+            }
+
+            catch(Exception e)
+            {
+                return new FailDataResult<Firm>(e.Message);
+            }
         }
+
+        public IDataResult<IQueryable<Firm>> GetEntityQueryable()
+        {
+            try
+            {
+                return new SuccessDataResult<IQueryable<Firm>>(_dal.GetListByQueryable(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
+            }
+
+            catch (Exception e)
+            {
+                return new FailDataResult<IQueryable<Firm>>(e.Message);
+            }
+        }
+
+        public IDataResult<List<Firm>> GetEntityValues()
+        {
+            try
+            {
+                return new SuccessDataResult<List<Firm>>(_dal.GetList().ToList(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
+            }
+
+            catch (Exception e)
+            {
+                return new FailDataResult<List<Firm>>(e.Message);
+            }
+        }
+
 
         public IResult Update(Firm firm)
         {
-            _dal.Update(firm);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
+            try
+            {
+                _dal.Update(firm);
+                return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
+            }
+
+            catch (Exception e)
+            {
+                return new FailResult(e.Message);
+            }
         }
     }
 }

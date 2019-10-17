@@ -23,14 +23,30 @@ namespace OneBoard.Business.Concrete
         }
         public IResult Add(User user)
         {
-            _userDal.Add(user);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);
+            try
+            {
+                _userDal.Add(user);
+                return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);
+            }
+
+            catch (Exception e)
+            {
+                return new FailResult(e.Message);
+            }
         }
 
         public IResult Delete(User user)
         {
-            _userDal.Delete(user);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
+            try
+            {
+                _userDal.Delete(user);
+                return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
+            }
+
+            catch (Exception e)
+            {
+                return new FailResult(e.Message);
+            }
         }
 
         public IDataResult<User> GetById(int userId)
@@ -42,25 +58,50 @@ namespace OneBoard.Business.Concrete
             }
             catch (Exception e)
             {
-                return new FailDataResult<User>(_userDal.Get(u => u.ID == userId), e.Message);
+                return new FailDataResult<User>(e.Message);
             }
         }
 
         public IDataResult<List<User>> GetEntityValues()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetList().ToList(),BasicCrudOperationMessages.SUCCESS_GET_LİST);
-           
+            try
+            {
+                return new SuccessDataResult<List<User>>(_userDal.GetList().ToList(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
+            }
+
+            catch (Exception e)
+            {
+                return new FailDataResult<List<User>>(e.Message);
+            }
+
+
         }
 
         public IDataResult<IQueryable<User>> GetEntityQueryable()
         {
-            return new SuccessDataResult<IQueryable<User>>(_userDal.GetListByQueryable(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
+            try
+            {
+                return new SuccessDataResult<IQueryable<User>>(_userDal.GetListByQueryable(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
+            }
+            
+            catch(Exception e)
+            {
+                return new FailDataResult<IQueryable<User>>(e.Message);
+            }
         }
 
         public IResult Update(User user)
         {
-            _userDal.Update(user);
-            return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
+            try
+            {
+                _userDal.Update(user);
+                return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
+            }
+
+            catch (Exception e)
+            {
+                return new FailResult(e.Message);
+            }
 
 
         }
