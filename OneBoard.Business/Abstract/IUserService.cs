@@ -1,4 +1,5 @@
-﻿using OneBoard.Core.Utilities.Results.Abstract;
+﻿using OneBoard.Core.Business;
+using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -7,18 +8,7 @@ using System.Text;
 
 namespace OneBoard.Business.Abstract
 {
-   public interface IUserService
+   public interface IUserService:IService<User>
    {
-        IResult Add(User user);
-
-        IResult Update(User user);
-
-        IResult Delete(User user);
-
-        IDataResult<List<User>> GetUsers();
-
-        IDataResult<User> GetUserById(int userId);
-
-        IDataResult<IQueryable<User>> GetUsersQueryable();
    }
 }

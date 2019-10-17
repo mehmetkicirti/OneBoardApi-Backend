@@ -1,10 +1,12 @@
-﻿using System;
+﻿using OneBoard.Core.Business;
+using OneBoard.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OneBoard.Business.Abstract
 {
-    public interface ISerieService
+    public interface ISerieService:IService<Serie>
     {
     }
 }

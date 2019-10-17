@@ -1,10 +1,12 @@
-﻿using System;
+﻿using OneBoard.Core.Business;
+using OneBoard.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OneBoard.Business.Abstract
 {
-    interface IDataSourceService
+   public interface IDataSourceService:IService<DataSource>
     {
     }
 }

@@ -33,7 +33,7 @@ namespace OneBoard.Business.Concrete
             return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
         }
 
-        public IDataResult<User> GetUserById(int userId)
+        public IDataResult<User> GetById(int userId)
         {
             //return new  _userDal.Get(u => u.ID == userId);
             try
@@ -46,13 +46,13 @@ namespace OneBoard.Business.Concrete
             }
         }
 
-        public IDataResult<List<User>> GetUsers()
+        public IDataResult<List<User>> GetEntityValues()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetList().ToList(),BasicCrudOperationMessages.SUCCESS_GET_LİST);
            
         }
 
-        public IDataResult<IQueryable<User>> GetUsersQueryable()
+        public IDataResult<IQueryable<User>> GetEntityQueryable()
         {
             return new SuccessDataResult<IQueryable<User>>(_userDal.GetListByQueryable(), BasicCrudOperationMessages.SUCCESS_GET_LİST);
         }
