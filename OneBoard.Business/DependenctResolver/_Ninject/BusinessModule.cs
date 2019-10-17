@@ -28,14 +28,11 @@ namespace OneBoard.Business.DependenctResolver._Ninject
             Bind<IChartTypeDal>().To<EfChartTypeDal>();
             Bind<ISerieDal>().To<EfSerieDal>();
 
-<<<<<<< HEAD
-=======
             Bind<IUserService>().To<UserManager>();
             Bind<IGroupService>().To<GroupManager>();
             Bind<IFirmService>().To<FirmManager>();
 
->>>>>>> 77ab2ce1cbf7526fcf2a48c657a7aff57107fce8
-            //Bind<DbContext>().To<DatabaseContext>();
+
 
         }
     }

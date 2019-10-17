@@ -7,8 +7,8 @@ namespace OneBoard.Core.Utilities.Results.Concerete.Result
 {
     public class GeneralResult : IResult
     {
-        public bool Success { get; set; }
-        public string Message { get; set; }
+        public bool Success { get;}
+        public string Message { get;}
 
         public GeneralResult(string Message,bool Success) : this(Success)
         {

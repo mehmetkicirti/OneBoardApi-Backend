@@ -8,12 +8,10 @@ namespace OneBoard.Core.Utilities.Results.Concerete.Result
     {
         public SuccessResult():base(true)
         {
-
         }
 
         public SuccessResult(string message) : base(message,true)
         {
-
         }
     }
 }

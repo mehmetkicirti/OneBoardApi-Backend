@@ -33,6 +33,19 @@ namespace OneBoard.Business.Concrete
             return new SuccessResult(BasicCrudOperationMessages.SUCCESS_DELETE);
         }
 
+        public IDataResult<User> GetUserById(int userId)
+        {
+            //return new  _userDal.Get(u => u.ID == userId);
+            try
+            {
+                return new SuccessDataResult<User>(_userDal.Get(u => u.ID == userId), BasicCrudOperationMessages.SUCCESS_GET_ID);
+            }
+            catch (Exception e)
+            {
+                return new FailDataResult<User>(_userDal.Get(u => u.ID == userId), e.Message);
+            }
+        }
+
         public IDataResult<List<User>> GetUsers()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetList().ToList(),BasicCrudOperationMessages.SUCCESS_GET_LİST);

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace OneBoard.Core.Utilities.Results.Abstract
 {
-    public interface IDataResult<T> : IResult
+    public interface IDataResult<out T> : IResult
     {
-        T Data { get; set; }
+        T Data { get;}
     }
 }

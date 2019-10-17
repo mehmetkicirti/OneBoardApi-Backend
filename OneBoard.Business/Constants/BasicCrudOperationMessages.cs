@@ -18,6 +18,8 @@ namespace OneBoard.Business.Constants
 
         public static string FAIL_ADD = "FAIL_ADD";
 
+        public static string SUCCESS_GET_ID = "SUCCESS_GET_ID";
+
         public static string FAIL_UPDATE = "FAIL_UPDATE";
 
         public static string FAIL_DELETE = "FAIL_DELETE";
