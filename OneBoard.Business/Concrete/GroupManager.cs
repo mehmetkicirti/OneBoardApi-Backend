@@ -15,7 +15,7 @@ namespace OneBoard.Business.Concrete
     public class GroupManager : IGroupService
     {
 
-        public IGroupDal _dal;
+        private readonly IGroupDal _dal;
 
         public GroupManager(IGroupDal dal)
         {

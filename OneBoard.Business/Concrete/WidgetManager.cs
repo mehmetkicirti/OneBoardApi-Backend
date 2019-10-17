@@ -12,9 +12,9 @@ using System.Text;
 
 namespace OneBoard.Business.Concrete
 {
-    public class WidgetManager:IWidgetTypeService
+    public class WidgetManager:IWidgetService
     {
-        public IWidgetDal widgetDal;
+        private readonly IWidgetDal widgetDal;
 
         public WidgetManager(IWidgetDal dal)
         {

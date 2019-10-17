@@ -15,7 +15,7 @@ namespace OneBoard.Business.Concrete
     public class UserManager : IUserService
     {
 
-        public IUserDal _userDal;
+        private readonly IUserDal _userDal;
 
         public UserManager(IUserDal dal)
         {

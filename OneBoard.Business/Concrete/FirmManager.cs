@@ -15,7 +15,7 @@ namespace OneBoard.Business.Concrete
     public class FirmManager : IFirmService
     {
 
-        public IFirmDal _dal;
+        private readonly IFirmDal _dal;
 
         public FirmManager(IFirmDal dal)
         {
