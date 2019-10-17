@@ -6,6 +6,10 @@ namespace OneBoard.Business.Constants
 {
     public static class BasicCrudOperationMessages
     {
+
+        
+       
+
         public static string SUCCESS_ADD = "SUCCESS_ADD";
 
         public static string SUCCESS_UPDATE = "SUCCESS_UPDATE";
@@ -21,6 +25,8 @@ namespace OneBoard.Business.Constants
         public static string FAIL_UPDATE = "FAIL_UPDATE";
 
         public static string FAIL_DELETE = "FAIL_DELETE";
+
+
 
        
 
