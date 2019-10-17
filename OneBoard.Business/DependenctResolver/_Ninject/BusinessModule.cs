@@ -32,7 +32,7 @@ namespace OneBoard.Business.DependenctResolver._Ninject
             Bind<IGroupService>().To<GroupManager>();
             Bind<IFirmService>().To<FirmManager>();
 
-            //Bind<DbContext>().To<DatabaseContext>();
+
 
         }
     }

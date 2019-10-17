@@ -17,6 +17,8 @@ namespace OneBoard.Business.Abstract
 
         IDataResult<List<User>> GetUsers();
 
+        IDataResult<User> GetUserById(int userId);
+
         IDataResult<IQueryable<User>> GetUsersQueryable();
    }
 }
