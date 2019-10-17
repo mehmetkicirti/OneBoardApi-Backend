@@ -14,15 +14,21 @@ namespace OneBoard.Business.Concrete
 {
     public class GroupManager : IGroupService
     {
+<<<<<<< HEAD
 
         private readonly IGroupDal _dal;
 
         public GroupManager(IGroupDal dal)
+=======
+        public IResult Add(Group entity)
+>>>>>>> fdcf9a89e3bf289ffb2852ed38a3c11f0e85db8a
         {
-            this._dal = dal;
+            throw new NotImplementedException();
         }
-        public IResult Add(Group group)
+
+        public IResult Delete(Group entity)
         {
+<<<<<<< HEAD
 
             try
             {
@@ -34,10 +40,14 @@ namespace OneBoard.Business.Concrete
             {
                 return new FailResult(e.Message);
             }
+=======
+            throw new NotImplementedException();
+>>>>>>> fdcf9a89e3bf289ffb2852ed38a3c11f0e85db8a
         }
 
-        public IResult Delete(Group group)
+        public IDataResult<Group> GetById(int Id)
         {
+<<<<<<< HEAD
             try
             {
                 _dal.Delete(group);
@@ -107,6 +117,24 @@ namespace OneBoard.Business.Concrete
                 return new FailResult(e.Message);
             }
             
+=======
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<IQueryable<Group>> GetEntityQueryable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<Group>> GetEntityValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult Update(Group entity)
+        {
+            throw new NotImplementedException();
+>>>>>>> fdcf9a89e3bf289ffb2852ed38a3c11f0e85db8a
         }
     }
 }
