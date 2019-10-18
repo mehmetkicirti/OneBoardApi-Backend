@@ -31,6 +31,15 @@ namespace OneBoard.Business.DependenctResolver._Autofac
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<GroupManager>().As<IGroupService>();
             builder.RegisterType<FirmManager>().As<IFirmService>();
+            builder.RegisterType<DashboardManager>().As<IDashboardService>();
+            builder.RegisterType<SerieManager>().As<ISerieService>();
+            builder.RegisterType<DataSourceManager>().As<IDataSourceService>();
+            builder.RegisterType<ChartTypeManager>().As<IChartTypeService>();
+            builder.RegisterType<WidgetManager>().As<IWidgetService>();
+            builder.RegisterType<WidgetTypeManager>().As<IWidgetTypeService>();
+            builder.RegisterType<UserFirmManager>().As<IUserFirmService>();
+            builder.RegisterType<UserGroupManager>().As<IUserGroupService>();
+            builder.RegisterType<DataSourceTypeManager>().As<IDataSourceService>();
 
         }
     }

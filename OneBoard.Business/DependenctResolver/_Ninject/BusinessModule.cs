@@ -15,25 +15,22 @@ namespace OneBoard.Business.DependenctResolver._Ninject
     {
         public override void Load()
         {
-            Bind<IUserDal>().To<EfUserDal>();
-            Bind<DataAccess.Abstract.IUserFirmDal>().To<EfUserFirmDal>();
-            Bind<DataAccess.Abstract.IUserGroupDal>().To<EfUserGroupDal>();
-            Bind<IGroupDal>().To<EfGroupDal>();
-            Bind<IFirmDal>().To<EfFirmDal>();
-            Bind<IDashboardDal>().To<EfDashboardDal>();
-            Bind<IWidgetDal>().To<EfWidgetDal>();
-            Bind<IWidgetTypeDal>().To<EfWidgetTypeDal>();
-            Bind<IDataSourceDal>().To<EfDataSourceDal>();
-            Bind<IDataSourceTypeDal>().To<EfDataSourceTypeDal>();
-            Bind<IChartTypeDal>().To<EfChartTypeDal>();
-            Bind<ISerieDal>().To<EfSerieDal>();
+            //Bind<IUserDal>().To<EfUserDal>();
+            //Bind<DataAccess.Abstract.IUserFirmDal>().To<EfUserFirmDal>();
+            //Bind<DataAccess.Abstract.IUserGroupDal>().To<EfUserGroupDal>();
+            //Bind<IGroupDal>().To<EfGroupDal>();
+            //Bind<IFirmDal>().To<EfFirmDal>();
+            //Bind<IDashboardDal>().To<EfDashboardDal>();
+            //Bind<IWidgetDal>().To<EfWidgetDal>();
+            //Bind<IWidgetTypeDal>().To<EfWidgetTypeDal>();
+            //Bind<IDataSourceDal>().To<EfDataSourceDal>();
+            //Bind<IDataSourceTypeDal>().To<EfDataSourceTypeDal>();
+            //Bind<IChartTypeDal>().To<EfChartTypeDal>();
+            //Bind<ISerieDal>().To<EfSerieDal>();
 
-            Bind<IUserService>().To<UserManager>();
-            Bind<IGroupService>().To<GroupManager>();
-            Bind<IFirmService>().To<FirmManager>();
-
-
-
+            ////Bind<IUserService>().To<UserManager>();
+            //Bind<IGroupService>().To<GroupManager>();
+            //Bind<IFirmService>().To<FirmManager>();
         }
     }
 }
