@@ -7,6 +7,8 @@ using OneBoard.DataAccess.EF;
 using OneBoard.DataAccess.EF._DatabaseContext;
 using OneBoard.Business.Concrete;
 using OneBoard.Business.Abstract;
+using OneBoard.Core.DataAccess.UnitOfWork;
+using OneBoard.Core.DataAccess;
 
 namespace OneBoard.Business.DependenctResolver._Autofac
 {
@@ -24,8 +26,8 @@ namespace OneBoard.Business.DependenctResolver._Autofac
             builder.RegisterType<EfDataSourceTypeDal>().As<IDataSourceTypeDal>();
             builder.RegisterType<EfWidgetDal>().As<IWidgetDal>();
             builder.RegisterType<EfWidgetTypeDal>().As<IWidgetTypeDal>();
-            builder.RegisterType<EfUserGroupDal>().As<DataAccess.Abstract.IUserGroupDal>();
-            builder.RegisterType<EfUserFirmDal>().As<DataAccess.Abstract.IUserFirmDal>();
+            builder.RegisterType<EfUserGroupDal>().As<IUserGroupDal>();
+            builder.RegisterType<EfUserFirmDal>().As<IUserFirmDal>();
 
 
             builder.RegisterType<UserManager>().As<IUserService>();
@@ -39,7 +41,9 @@ namespace OneBoard.Business.DependenctResolver._Autofac
             builder.RegisterType<WidgetTypeManager>().As<IWidgetTypeService>();
             builder.RegisterType<UserFirmManager>().As<IUserFirmService>();
             builder.RegisterType<UserGroupManager>().As<IUserGroupService>();
-            builder.RegisterType<DataSourceTypeManager>().As<IDataSourceService>();
+            builder.RegisterType<DataSourceTypeManager>().As<IDataSourceTypeService>();
+
+            builder.RegisterType<UnitOfWork<DatabaseContext>>().As<IUnitOfWork>();
 
         }
     }

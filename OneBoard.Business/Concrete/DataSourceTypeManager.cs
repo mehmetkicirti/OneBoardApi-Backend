@@ -1,5 +1,6 @@
 ﻿using OneBoard.Business.Abstract;
 using OneBoard.Core.Business.EFBaseService;
+using OneBoard.Core.DataAccess;
 using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Core.Utilities.Results.Concerete.Data;
 using OneBoard.Core.Utilities.Results.Concerete.Result;
@@ -14,7 +15,7 @@ namespace OneBoard.Business.Concrete
 {
     public class DataSourceTypeManager : EfBaseService<IDataSourceTypeDal, DataSourceType>, IDataSourceTypeService
     {
-        public DataSourceTypeManager(IDataSourceTypeDal dal) : base(dal)
+        public DataSourceTypeManager(IDataSourceTypeDal dal, IUnitOfWork unitOfWork) : base(dal, unitOfWork)
         {
         }
     }
