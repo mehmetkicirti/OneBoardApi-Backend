@@ -1,7 +1,7 @@
-﻿using System;
+﻿using OneBoard.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using OneBoard.Core.Entity;
 
 namespace OneBoard.Entities.Concrete
 {

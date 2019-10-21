@@ -1,4 +1,4 @@
-﻿using OneBoard.Core.Entity;
+﻿using OneBoard.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +13,8 @@ namespace OneBoard.Entities.Concrete
         public string LoginName { get; set; }
         public DateTime LastLogin { get; set; }
         public int UserType{ get; set; }
-        public string Token{ get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime? RefreshTokenEndDate { get; set; }
         public IEnumerable<UserFirm> UserFirms { get; set; }
         public IEnumerable<UserGroup> UserGroups { get; set; }
         public IEnumerable<Dashboard> Dashboards { get; set; }
