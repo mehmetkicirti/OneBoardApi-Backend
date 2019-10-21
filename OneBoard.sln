@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneBoard.Entities", "OneBoard.Entities\OneBoard.Entities.csproj", "{CFFF86EC-E3CD-44D3-AAF6-F8CFFCC6FC8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneBoard.Entities", "OneBoard.Entities\OneBoard.Entities.csproj", "{CFFF86EC-E3CD-44D3-AAF6-F8CFFCC6FC8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneBoard.DataAccess", "OneBoard.DataAccess\OneBoard.DataAccess.csproj", "{E810E62D-05D2-43BC-AC33-928C8E5CB418}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneBoard.DataAccess", "OneBoard.DataAccess\OneBoard.DataAccess.csproj", "{E810E62D-05D2-43BC-AC33-928C8E5CB418}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneBoard.Business", "OneBoard.Business\OneBoard.Business.csproj", "{A64C3086-F092-425C-9100-5C212C85BB04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneBoard.Business", "OneBoard.Business\OneBoard.Business.csproj", "{A64C3086-F092-425C-9100-5C212C85BB04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneBoard.Core", "OneBoard.Core\OneBoard.Core.csproj", "{F04CA7C2-3156-4985-B0FA-7A8E3A8F69AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneBoard.Core", "OneBoard.Core\OneBoard.Core.csproj", "{F04CA7C2-3156-4985-B0FA-7A8E3A8F69AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneBoard.WebAPI", "OneBoard.WebAPI\OneBoard.WebAPI.csproj", "{C38A6639-BB26-4181-A017-9865EAF4235B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneBoard.WebAPI", "OneBoard.WebAPI\OneBoard.WebAPI.csproj", "{C38A6639-BB26-4181-A017-9865EAF4235B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
