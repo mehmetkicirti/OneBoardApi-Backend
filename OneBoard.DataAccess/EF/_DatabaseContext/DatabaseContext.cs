@@ -9,7 +9,14 @@ namespace OneBoard.DataAccess.EF._DatabaseContext
     public class DatabaseContext:DbContext
     {
         // Haktan=> you can check to added database and entities.After you add migration 
-        //To add migrations =>you should do at the following steps=> 1. Open CMD => 2.dotnet ef migrations add "..." => 3. dotnet ef database update .. 
+        //To add migrations =>you should do at the following steps=> 1. Open CMD => 2.dotnet ef migrations add "..." => 3. dotnet ef database update ..
+        public DatabaseContext()
+        {
+
+        }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-7DBO8O5\SQLEXPRESS;Database=OneBoardV2;User ID=kullanici;Password=1234;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");

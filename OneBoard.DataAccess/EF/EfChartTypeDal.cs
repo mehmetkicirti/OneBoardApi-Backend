@@ -8,7 +8,7 @@ using OneBoard.Entities.Concrete;
 
 namespace OneBoard.DataAccess.EF
 {
-    public class EfChartTypeDal:EfEntityRepositoryBase<ChartType,DatabaseContext>,IChartTypeDal
+    public class EfChartTypeDal : EfEntityRepositoryBase<ChartType, DatabaseContext>, IChartTypeDal
     {
     }
 }

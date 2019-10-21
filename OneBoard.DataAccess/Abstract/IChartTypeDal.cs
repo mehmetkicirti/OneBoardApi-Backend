@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OneBoard.DataAccess.Abstract
 {
-    public interface IChartTypeDal:IEntityRepository<ChartType>
+    public interface IChartTypeDal : IEntityRepository<ChartType>
     {
     }
 }

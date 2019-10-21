@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OneBoard.Entities\OneBoard.Entities.csproj" />
+    <ProjectReference Include="..\OneBoard.Core\OneBoard.Core.csproj" />
   </ItemGroup>
 
 </Project>
