@@ -9,7 +9,6 @@ namespace OneBoard.Core.Utilities
 
         public static string SUCCESS_ADD= "Successfully added the entity";
 
-
         public static string SUCCESS_UPDATE = "Successfully updated the entity";
 
         public static string SUCCESS_DELETE = "Successfully deleted the entity";
@@ -26,7 +25,9 @@ namespace OneBoard.Core.Utilities
 
         public static string FAIL_DELETE = "FAIL_DELETE";
 
+        public static string NOT_FOUND_ENTİTY = "Not found any entity.";
 
+        public static string FIND_BY_ID_ERROR = "When It is finding a content.An error occurred.";
 
        
 
