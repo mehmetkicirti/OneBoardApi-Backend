@@ -11,6 +11,8 @@ namespace OneBoard.Entities.Concrete
         public int ID { get; set; }
         public string UserName { get; set; }
         public string LoginName { get; set; }
+        [Required()]
+        public string Password { get; set; }
         public DateTime LastLogin { get; set; }
         public int UserType{ get; set; }
         public string RefreshToken { get; set; }

@@ -187,7 +187,11 @@ namespace OneBoard.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LoginName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");

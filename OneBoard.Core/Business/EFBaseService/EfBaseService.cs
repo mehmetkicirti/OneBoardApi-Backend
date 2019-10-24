@@ -20,7 +20,7 @@ namespace OneBoard.Core.Business.EFBaseService
         private readonly TDal _dal;
         private readonly IUnitOfWork _unitOfWork;
 
-        public EfBaseService(TDal dal, IUnitOfWork unitOfWork)
+        public EfBaseService(TDal dal,IUnitOfWork unitOfWork)
         {
             _dal = dal;
             _unitOfWork = unitOfWork;

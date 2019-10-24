@@ -12,20 +12,19 @@ namespace OneBoard.Core.DataAccess.EntityFramework
         IEntityRepository<TEntity> where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-        //private readonly TContext _context;
-        //public EfEntityRepositoryBase(TContext context)
-        //{
-        //    this._context = context;
-        //}
+        protected readonly TContext _context;
+        public EfEntityRepositoryBase(TContext context)
+        {
+            this._context =context;
+        }
 
         public void Add(TEntity entity)
         {
-            using (var _context =new TContext())
-            {
+            
                 var addedEntity = _context.Entry(entity);
                 addedEntity.State = EntityState.Added;
-                _context.SaveChanges();
-            }
+                //_context.SaveChanges();
+            
                 
         }
 
@@ -134,7 +133,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
             using (var _context = new TContext())
             {
                 await _context.AddAsync<TEntity>(entity);
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
             }
         }
         public async Task<IEnumerable<TEntity>> ListAsync()

@@ -10,8 +10,8 @@ using OneBoard.DataAccess.EF._DatabaseContext;
 namespace OneBoard.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20191020215606_ChangeUserTable")]
-    partial class ChangeUserTable
+    [Migration("20191024083806_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,6 +189,10 @@ namespace OneBoard.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LoginName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RefreshToken")

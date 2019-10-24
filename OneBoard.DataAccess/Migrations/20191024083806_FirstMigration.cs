@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OneBoard.DataAccess.Migrations
 {
-    public partial class FirstMigrationsToEntities : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,11 +53,13 @@ namespace OneBoard.DataAccess.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(nullable: true),
-                    LoginName = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: false),
+                    LoginName = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
                     LastLogin = table.Column<DateTime>(nullable: false),
                     UserType = table.Column<int>(nullable: false),
-                    Token = table.Column<string>(nullable: true)
+                    RefreshToken = table.Column<string>(nullable: true),
+                    RefreshTokenEndDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
