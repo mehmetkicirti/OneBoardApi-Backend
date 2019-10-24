@@ -32,28 +32,29 @@ namespace OneBoard.WebAPI.Controllers
         [HttpPost("Add")]
         public IActionResult Add(Firm firm)
         {
-            var result = _Firmservice.Add(firm);
+            var result = _Firmservice.AddByVirtualMethod(firm);
 
             if (result.Success)
             {
                 return Ok(result.Message);
             }
 
-            return BadRequest(result.Success.ToString() + " and  " + result.Message);
+            return BadRequest(result.Success.ToString() + "and " + result.Message);
         }
 
-        [HttpPost("Update")]
-        public IActionResult Update(Firm firm)
-        {
-            var result = _Firmservice.Update(firm);
+       [HttpPost("Update")]
+       public IActionResult Update(Firm firm)
+       {
+          var result = _Firmservice.UpdateByVirtualMethod(firm);
 
-            if (result.Success)
-            {
+          if (result.Success)
+          {
                 return Ok(result.Message);
-            }
+          }
 
-            return BadRequest(result.Success.ToString() + " and  " + result.Message);
+            return BadRequest(result.Success.ToString() + "and " + result.Message);
         }
+          
 
         [HttpPost("Delete")]
         public IActionResult Delete(Firm firm)

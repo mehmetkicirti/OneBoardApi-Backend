@@ -35,5 +35,36 @@ namespace OneBoard.Core.Business
 
         Task<IDataResult<TEntity>> FindByIdAsync(int Id);
         #endregion
+
+
+        #region virtual service
+
+        IResult AddByVirtualMethod(TEntity entity);
+
+        IResult DeleteByVirtualMethod(TEntity entity);
+
+        IResult UpdateByVirtualMethod(TEntity entity);
+
+        IDataResult<List<TEntity>> GetListByVirtualMethod();
+
+        IDataResult<IQueryable<TEntity>> GetQueryableByVirtualMethod();
+
+        Task<IResult> AddAsyncByVirtualMethod(TEntity entity);
+
+        Task<IResult> DeleteAsyncByVirtualMethod(TEntity entity);
+
+        Task<IResult> UpdateAsyncByVirtualMethod(TEntity entity);
+
+        Task<IDataResult<IList<TEntity>>> GetEntityValuesAsyncByVirtualMethod();
+
+
+        #endregion
+
+
+
+
+
+
+
     }
 }

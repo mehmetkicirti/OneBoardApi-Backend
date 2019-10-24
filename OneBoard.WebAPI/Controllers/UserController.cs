@@ -20,18 +20,18 @@ namespace OneBoard.WebAPI.Controllers
             this.service = service;
         }
 
-        [HttpPost(template:"Add")]
-        public IActionResult Add(User user)
-        {
-            var result = service.Add(user);
+      [HttpPost(template:"Add")]
+      public IActionResult Add(User user)
+       {
+           var result = service.Add(user);
 
-            if (result.Success)
-            {
+           if (result.Success)
+          {
                 return Ok(result.Message);
-            }
+          }
 
-            return BadRequest(result.Success.ToString());
-        }
+          return BadRequest(result.Success.ToString());
+      }
 
         [HttpPost(template:"Update")]
 
