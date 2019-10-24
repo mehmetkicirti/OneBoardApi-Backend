@@ -1,4 +1,6 @@
-﻿using OneBoard.Core.DataAccess;
+﻿using FluentValidation;
+using OneBoard.Core.CrossCuttingCornces.Validation._FluentValidation;
+using OneBoard.Core.DataAccess;
 using OneBoard.Core.Utilities;
 using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Core.Utilities.Results.Concerete.Data;
@@ -20,18 +22,33 @@ namespace OneBoard.Core.Business.EFBaseService
         private readonly TDal _dal;
         private readonly IUnitOfWork _unitOfWork;
 
+        public TDal Dal
+        {
+            get { return _dal; }
+        }
+
+        public IUnitOfWork UnitOfWork
+        {
+            get { return _unitOfWork; }
+        }
+
         public EfBaseService(TDal dal, IUnitOfWork unitOfWork)
         {
             _dal = dal;
             _unitOfWork = unitOfWork;
         }
 
+
+
         public IResult Add(TEntity entity)
         {
             try
             {
+
                 _dal.Add(entity);
+
                 _unitOfWork.Complete();
+
                 return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);
             }
 
@@ -127,7 +144,7 @@ namespace OneBoard.Core.Business.EFBaseService
             catch (Exception e)
             {
                 return new FailResult(e.Message);
-            } 
+            }
         }
         public async Task<IResult> UpdateAsync(int Id)
         {
@@ -170,7 +187,7 @@ namespace OneBoard.Core.Business.EFBaseService
             try
             {
                 TEntity entity = await _dal.FindByIdAsync(Id);
-                if(entity == null)
+                if (entity == null)
                 {
                     return new FailDataResult<TEntity>($"{BasicCrudOperationMessages.NOT_FOUND_ENTİTY} :That belonging to {Id} any entity.");
                 }
@@ -193,7 +210,7 @@ namespace OneBoard.Core.Business.EFBaseService
             try
             {
                 TEntity entity = await _dal.FindByIdAsync(Id);
-                if(entity == null)
+                if (entity == null)
                 {
                     return new FailDataResult<TEntity>($"{BasicCrudOperationMessages.NOT_FOUND_ENTİTY} :That belonging to {Id} any entity.");
                 }
@@ -206,5 +223,78 @@ namespace OneBoard.Core.Business.EFBaseService
         }
 
         #endregion
+
+
+
+
+
+
+
+
+        #region virtual Extend Methods
+
+       public virtual IResult AddByVirtualMethod(TEntity entity)
+       { 
+            throw new NotImplementedException();
+       }
+
+        public virtual IResult DeleteByVirtualMethod(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual IResult UpdateByVirtualMethod(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual IDataResult<List<TEntity>> GetListByVirtualMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual IDataResult<IQueryable<TEntity>> GetQueryableByVirtualMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual Task<IResult> AddAsyncByVirtualMethod(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual Task<IResult> DeleteAsyncByVirtualMethod(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual Task<IResult> UpdateAsyncByVirtualMethod(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual Task<IDataResult<IList<TEntity>>> GetEntityValuesAsyncByVirtualMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
+
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
     }
 }

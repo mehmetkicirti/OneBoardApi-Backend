@@ -9,10 +9,17 @@ using OneBoard.Business.Concrete;
 using OneBoard.Business.Abstract;
 using OneBoard.Core.DataAccess.UnitOfWork;
 using OneBoard.Core.DataAccess;
+using System.Reflection;
+using Autofac.Extras.DynamicProxy;
+using Castle.DynamicProxy;
+using OneBoard.Core.Utilities.Interceptors;
+using OneBoard.Core.Business.EFBaseService;
+using OneBoard.Core.Business;
+using OneBoard.Entities.Abstract;
 
 namespace OneBoard.Business.DependenctResolver._Autofac
 {
-   public class AutofacBusinessModule:Module
+   public class AutofacBusinessModule:Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -43,7 +50,21 @@ namespace OneBoard.Business.DependenctResolver._Autofac
             builder.RegisterType<UserGroupManager>().As<IUserGroupService>();
             builder.RegisterType<DataSourceTypeManager>().As<IDataSourceTypeService>();
 
+
+       
+
+            
+
             builder.RegisterType<UnitOfWork<DatabaseContext>>().As<IUnitOfWork>();
+
+            var assemblies = Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(assemblies)
+                .AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new Castle.DynamicProxy.ProxyGenerationOptions
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
 
         }
     }

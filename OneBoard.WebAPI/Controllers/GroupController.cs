@@ -20,7 +20,6 @@ namespace OneBoard.WebAPI.Controllers
             this._service = service;
         }
 
-
         [HttpPost("Add")]
         public IActionResult Add(Group group)
         {
@@ -46,6 +45,10 @@ namespace OneBoard.WebAPI.Controllers
 
             return BadRequest(result.Success.ToString() + " and  " + result.Message);
         }
+
+
+
+
 
         [HttpPost("Delete")]
         public IActionResult Delete(Group group)
