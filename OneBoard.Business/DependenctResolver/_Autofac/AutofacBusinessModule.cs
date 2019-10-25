@@ -9,13 +9,12 @@ using OneBoard.Business.Concrete;
 using OneBoard.Business.Abstract;
 using OneBoard.Core.DataAccess.UnitOfWork;
 using OneBoard.Core.DataAccess;
+using OneBoard.Core.Utilities.Interceptors;
 using System.Reflection;
 using Autofac.Extras.DynamicProxy;
-using Castle.DynamicProxy;
-using OneBoard.Core.Utilities.Interceptors;
-using OneBoard.Core.Business.EFBaseService;
+using OneBoard.Core.Utilities.Security.Token;
+using OneBoard.Business.Abstract.Authentication;
 using OneBoard.Core.Business;
-using OneBoard.Entities.Abstract;
 
 namespace OneBoard.Business.DependenctResolver._Autofac
 {
@@ -35,7 +34,7 @@ namespace OneBoard.Business.DependenctResolver._Autofac
             builder.RegisterType<EfWidgetTypeDal>().As<IWidgetTypeDal>();
             builder.RegisterType<EfUserGroupDal>().As<IUserGroupDal>();
             builder.RegisterType<EfUserFirmDal>().As<IUserFirmDal>();
-
+            builder.RegisterType<EfAuthDal>().As<IAuthDal>();
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<GroupManager>().As<IGroupService>();
@@ -49,10 +48,9 @@ namespace OneBoard.Business.DependenctResolver._Autofac
             builder.RegisterType<UserFirmManager>().As<IUserFirmService>();
             builder.RegisterType<UserGroupManager>().As<IUserGroupService>();
             builder.RegisterType<DataSourceTypeManager>().As<IDataSourceTypeService>();
-
-
-       
-
+            
+            builder.RegisterType<TokenHandler>().As<ITokenHandler>();
+            builder.RegisterType<AuthenticationService>().As<IAuthenticationService<AccessToken>>();
             
 
             builder.RegisterType<UnitOfWork<DatabaseContext>>().As<IUnitOfWork>();
