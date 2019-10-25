@@ -24,9 +24,7 @@ namespace OneBoard.Business.Concrete
     {
         public FirmManager(IFirmDal dal, IUnitOfWork unitOfWork) : base(dal, unitOfWork)
         {
-
         }
-
 
         [ValidationAspect(typeof(FirmValidator),Priority =1)]
         public override IResult AddByVirtualMethod(Firm entity)
@@ -34,9 +32,9 @@ namespace OneBoard.Business.Concrete
             try
             {
                //FluentValidationTool.Validate(new FirmValidator(), entity);
-                Dal.Add(entity);
+                _dal.Add(entity);
 
-                UnitOfWork.Complete();
+                _unitOfWork.Complete();
 
                 return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);
             }
@@ -54,16 +52,16 @@ namespace OneBoard.Business.Concrete
             try
             {
                 //FluentValidationTool.Validate(new FirmValidator(), entity);
-                Dal.Update(entity);
+                _dal.Update(entity);
 
-                UnitOfWork.Complete();
+                _unitOfWork.Complete();
 
                 return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
             }
 
             catch (Exception e)
             {
-                return new FailResult($"{BasicCrudOperationMessages.FAIL_UPDATE} : {e.Message}");
+                return new FailResult($"{BasicCrudOperationMessages.FAIL_UPDATE} :");
             }
         }
 
