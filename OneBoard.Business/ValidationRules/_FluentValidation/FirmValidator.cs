@@ -12,9 +12,10 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
     {
        public FirmValidator()
        {
-            RuleFor(f => f.FirmName).Must(f => f.StartsWith("K")).NotNull()
-                .NotEqual("Koç").WithMessage(ValidationMessages.StartsWith+"\n"
-                +ValidationMessages.NotNull+"\n"+ValidationMessages.NotEqual);
+            //RuleFor(f => f.FirmName).Must(f => f.StartsWith("K")).NotNull()
+            //    .NotEqual("Koç").WithMessage(ValidationMessages.StartsWith+"\n"
+            //    +ValidationMessages.NotNull+"\n"+ValidationMessages.NotEqual);
+
        }
     }
 }
