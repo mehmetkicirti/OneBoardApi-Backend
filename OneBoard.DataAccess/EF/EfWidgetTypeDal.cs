@@ -8,7 +8,10 @@ using OneBoard.Entities.Concrete;
 
 namespace OneBoard.DataAccess.EF
 {
-    public class EfWidgetTypeDal:EfEntityRepositoryBase<WidgetType,DatabaseContext>,IWidgetTypeDal
+    public class EfWidgetTypeDal : EfEntityRepositoryBase<WidgetType, DatabaseContext>, IWidgetTypeDal
     {
+        public EfWidgetTypeDal(DatabaseContext context) : base(context)
+        {
+        }
     }
 }

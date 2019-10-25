@@ -8,7 +8,10 @@ using OneBoard.Entities.Concrete;
 
 namespace OneBoard.DataAccess.EF
 {
-   public class EfSerieDal:EfEntityRepositoryBase<Serie,DatabaseContext>,ISerieDal
+    public class EfSerieDal : EfEntityRepositoryBase<Serie, DatabaseContext>, ISerieDal
     {
+        public EfSerieDal(DatabaseContext context) : base(context)
+        {
+        }
     }
 }

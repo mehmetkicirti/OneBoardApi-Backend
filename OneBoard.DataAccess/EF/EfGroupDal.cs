@@ -8,7 +8,10 @@ using OneBoard.Entities.Concrete;
 
 namespace OneBoard.DataAccess.EF
 {
-   public class EfGroupDal:EfEntityRepositoryBase<Group,DatabaseContext>,IGroupDal
+    public class EfGroupDal : EfEntityRepositoryBase<Group, DatabaseContext>, IGroupDal
     {
+        public EfGroupDal(DatabaseContext context) : base(context)
+        {
+        }
     }
 }

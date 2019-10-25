@@ -9,6 +9,7 @@ namespace OneBoard.DataAccess.Abstract
 {
     public interface IUserDal:IEntityRepository<User>
     {
+        Task AddUserAsync(User user);
         Task<User> FindByLoginNameAndPassword(string LoginName, string password);
         Task SaveRefreshToken(int userId, string refreshToken);
         Task<User> GetUserByRefreshToken(string refreshToken);

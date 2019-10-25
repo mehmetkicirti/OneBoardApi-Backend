@@ -8,7 +8,10 @@ using OneBoard.Entities.Concrete;
 
 namespace OneBoard.DataAccess.EF
 {
-    public class EfDashboardDal:EfEntityRepositoryBase<Dashboard,DatabaseContext>,IDashboardDal
+    public class EfDashboardDal : EfEntityRepositoryBase<Dashboard, DatabaseContext>, IDashboardDal
     {
+        public EfDashboardDal(DatabaseContext context) : base(context)
+        {
+        }
     }
 }

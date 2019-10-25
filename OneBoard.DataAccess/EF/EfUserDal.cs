@@ -1,4 +1,8 @@
-﻿using OneBoard.Core.DataAccess.EntityFramework;
+﻿using Microsoft.Extensions.Options;
+using OneBoard.Core.DataAccess;
+using OneBoard.Core.DataAccess.EntityFramework;
+using OneBoard.Core.Helper;
+using OneBoard.Core.Utilities.Security.Token;
 using OneBoard.DataAccess.Abstract;
 using OneBoard.DataAccess.EF._DatabaseContext;
 using OneBoard.Entities.Concrete;
@@ -10,48 +14,68 @@ using System.Threading.Tasks;
 
 namespace OneBoard.DataAccess.EF
 {
-    public class EfUserDal : EfEntityRepositoryBase<User, DatabaseContext> ,IUserDal
+    public class EfUserDal : EfEntityRepositoryBase<User, DatabaseContext>, IUserDal
     {
-        public EfUserDal(DatabaseContext _context):base(context:_context)
+        private readonly TokenOptions tokenOptions;
+        //private readonly IUnitOfWork _unitofwork;
+        public EfUserDal(DatabaseContext _context, IOptions<TokenOptions> tokenOptions) : base(context: _context)
         {
+            this.tokenOptions = tokenOptions.Value;
+            //this._unitofwork = unitOfWork;
+        }
+
+        public async Task AddUserAsync(User user)
+        {
+            user.LastLogin = DateTime.UtcNow;
+            await _context.AddAsync(user);
         }
 
         public async Task<User> FindByLoginNameAndPassword(string LoginName, string password)
         {
-            string hashPassword = SecurityAlgorithms.HmacSha256Signature;
-            
-            Task<User> t= Task.Run(() => 
-                _context.Users.Where(u => u.LoginName == LoginName && u.Password == hashPassword).FirstOrDefault()
+            //string encryptPassword = EncryptionPassword.Decrypt(password);
+
+            Task<User> task = Task.Run(() =>
+                 _context.Users.Where(u => u.LoginName == LoginName && u.Password == password).FirstOrDefault()
             );
 
-            return await t;
+            return await task;
         }
 
         public async Task<User> GetUserByRefreshToken(string refreshToken)
         {
-            Task<User> t= Task.Run(() =>
-                _context.Users.Where(u => u.RefreshToken == refreshToken).FirstOrDefault()
+            Task<User> task = Task.Run(() =>
+                 _context.Users.Where(u => u.RefreshToken == refreshToken).FirstOrDefault()
             );
 
-            return await t;
+            return await task;
         }
 
         public async Task<int> GetUsersCount()
         {
-            Task<int> t = Task.Run(() =>
+            Task<int> task = Task.Run(() =>
                 _context.Users.Count()
             );
-            return await t;
+            return await task;
         }
 
-        public Task RemoveRefreshToken(User user)
+        public async Task RemoveRefreshToken(User user)
         {
-            Task t = Task.Run(() => _context.Users.);
+            await Task.Run(() =>
+            {
+                User newUser = this.Find(user.ID);
+                newUser.RefreshToken = null;
+                newUser.RefreshTokenEndDate = null;
+                return newUser;
+            });
         }
 
-        public Task SaveRefreshToken(int userId, string refreshToken)
+        public async Task SaveRefreshToken(int userId, string refreshToken)
         {
-            throw new NotImplementedException();
+
+            User newUser = await this.FindByIdAsync(userId);
+            newUser.RefreshToken = refreshToken;
+            newUser.RefreshTokenEndDate = DateTime.Now.AddMinutes(tokenOptions.RefreshTokenExpiration);
+            await Task.CompletedTask;
         }
     }
 }

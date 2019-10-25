@@ -19,10 +19,10 @@ namespace OneBoard.DataAccess.EF._DatabaseContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           // optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-7DBO8O5\SQLEXPRESS;Database=OneBoardV2;User ID=kullanici;Password=1234;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-7DBO8O5\SQLEXPRESS;Database=OneBoardV2;User ID=kullanici;Password=1234;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //First M SQL SERVER CONFİG 
 
-            optionsBuilder.UseSqlServer(connectionString: @"Data Source=DESKTOP-BFT7NEM\SQLEXPRESS;Database=OneBoardV2;Trusted_Connection=true");
+            //optionsBuilder.UseSqlServer(connectionString: @"Data Source=DESKTOP-BFT7NEM\SQLEXPRESS;Database=OneBoardV2;Trusted_Connection=true");
             //SECOND H SQL SERVER CONFİG
         }
         //public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)

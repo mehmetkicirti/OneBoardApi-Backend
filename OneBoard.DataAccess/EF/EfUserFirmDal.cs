@@ -8,8 +8,10 @@ using OneBoard.Entities.Concrete;
 
 namespace OneBoard.DataAccess.EF
 {
-   public class EfUserFirmDal:EfEntityRepositoryBase<UserFirm,DatabaseContext>,IUserFirmDal
+    public class EfUserFirmDal : EfEntityRepositoryBase<UserFirm, DatabaseContext>, IUserFirmDal
     {
-
+        public EfUserFirmDal(DatabaseContext context) : base(context)
+        {
+        }
     }
 }

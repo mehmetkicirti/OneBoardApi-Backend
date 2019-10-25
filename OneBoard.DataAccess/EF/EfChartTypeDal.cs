@@ -10,5 +10,8 @@ namespace OneBoard.DataAccess.EF
 {
     public class EfChartTypeDal : EfEntityRepositoryBase<ChartType, DatabaseContext>, IChartTypeDal
     {
+        public EfChartTypeDal(DatabaseContext context) : base(context)
+        {
+        }
     }
 }

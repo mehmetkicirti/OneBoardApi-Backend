@@ -9,7 +9,10 @@ using OneBoard.Entities.Concrete;
 
 namespace OneBoard.DataAccess.EF
 {
-    public class EfDataSourceTypeDal:EfEntityRepositoryBase<DataSourceType,DatabaseContext>,IDataSourceTypeDal
+    public class EfDataSourceTypeDal : EfEntityRepositoryBase<DataSourceType, DatabaseContext>, IDataSourceTypeDal
     {
+        public EfDataSourceTypeDal(DatabaseContext context) : base(context)
+        {
+        }
     }
 }
