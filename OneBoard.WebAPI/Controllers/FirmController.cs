@@ -10,10 +10,12 @@ using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
 using OneBoard.Entities.DTO.Firm;
 using OneBoard.Core.Utilities.Extensions;
-using OneBoard.Entities.Mapping;
+using OneBoard.Entities.Mapping.FirmMap;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OneBoard.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FirmController : ControllerBase
