@@ -18,31 +18,18 @@ namespace OneBoard.Core.Business.EFBaseService
         IService<TEntity> where TEntity : class, IEntity, new()
         where TDal : IEntityRepository<TEntity>
     {
-
-        private readonly TDal _dal;
-        private readonly IUnitOfWork _unitOfWork;
-
-<<<<<<< HEAD
-        public EfBaseService(TDal dal,IUnitOfWork unitOfWork)
-=======
-        public TDal Dal
-        {
-            get { return _dal; }
-        }
-
-        public IUnitOfWork UnitOfWork
-        {
-            get { return _unitOfWork; }
-        }
+        protected readonly TDal _dal;
+        protected readonly IUnitOfWork _unitOfWork;
 
         public EfBaseService(TDal dal, IUnitOfWork unitOfWork)
->>>>>>> 5ca3e8e3ecbbb3fa0499f9d6e9e7b145bce76331
         {
             _dal = dal;
             _unitOfWork = unitOfWork;
         }
-
-
+        public EfBaseService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         public IResult Add(TEntity entity)
         {
@@ -88,7 +75,7 @@ namespace OneBoard.Core.Business.EFBaseService
             catch (Exception e)
             {
 
-                throw new Exception(e.Message);
+                return new FailDataResult<TEntity>(e.Message);
             }
         }
 

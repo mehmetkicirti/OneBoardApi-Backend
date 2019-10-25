@@ -20,12 +20,9 @@ namespace OneBoard.Core.DataAccess.EntityFramework
 
         public void Add(TEntity entity)
         {
-            
                 var addedEntity = _context.Entry(entity);
                 addedEntity.State = EntityState.Added;
                 //_context.SaveChanges();
-            
-                
         }
 
         public void Delete(TEntity entity)
@@ -157,7 +154,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
             using (var _context = new TContext())
             {
                 var entity = await _context.FindAsync<TEntity>(ID);
-                var UpdateItem = _context.Entry<TEntity>(entity);
+                var UpdateItem = _context.Entry(entity);
                 UpdateItem.State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }

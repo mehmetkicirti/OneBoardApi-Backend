@@ -10,7 +10,6 @@ namespace OneBoard.Core.Utilities.Interceptors
 
         public virtual void OnBefore(IInvocation invocation)
         { 
-
         }
 
         public virtual void OnAfter(IInvocation invocation) { }
@@ -18,7 +17,6 @@ namespace OneBoard.Core.Utilities.Interceptors
         public virtual void OnSuccess(IInvocation invocation) { }
 
         public virtual void OnException(IInvocation invocation) { }
-
 
         public override void Intercept(IInvocation invocation)
         {
@@ -46,8 +44,6 @@ namespace OneBoard.Core.Utilities.Interceptors
             }
 
             OnAfter(invocation);
-
-            
         }
 
     }

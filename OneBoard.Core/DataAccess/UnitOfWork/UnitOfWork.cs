@@ -6,26 +6,25 @@ using System.Threading.Tasks;
 
 namespace OneBoard.Core.DataAccess.UnitOfWork
 {
-    public class UnitOfWork<TContext>:IUnitOfWork
-        where TContext:DbContext,new()
+    public class UnitOfWork<TContext> : IUnitOfWork
+        where TContext : DbContext, new()
     {
         private readonly TContext _context;
-        
+
+        public UnitOfWork(TContext context)
+        {
+            this._context = context;
+        }
+
         public async Task CompleteAsync()
         {
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
+            await _context.SaveChangesAsync();
         }
-        public void Complete()
+
+
+        void IUnitOfWork.Complete()
         {
-               _context.SaveChanges();
+            this._context.SaveChanges();
         }
     }
 }

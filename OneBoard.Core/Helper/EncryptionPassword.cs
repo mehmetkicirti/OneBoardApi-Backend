@@ -8,33 +8,32 @@ namespace OneBoard.Core.Helper
    public class EncryptionPassword
     {
 
-        #region RemoveEncryptProcess
-        public static string EncryptPassword(string password)
+        #region EncryptDecryptProcess
+        private static int cryptoNumericKey = 61;
+        public static string Encrypt(string cleanText)
         {
-            if (password == "" || password == null)
-                throw new ArgumentNullException("There is no content to encrypt.");
-
-            SHA256Managed pwd = new SHA256Managed();
-            byte[] aryPassword = ConvertToByte(password);
-            byte[] aryHash = pwd.ComputeHash(aryPassword);
-
-            return BitConverter.ToString(aryHash);
+            string encryptText = string.Empty;
+            foreach (char item in cleanText)
+            {
+                int ascii = Convert.ToInt32(item);
+                ascii += cryptoNumericKey;
+                char newChar = Convert.ToChar(ascii);
+                encryptText += newChar;
+            }
+            return encryptText;
         }
-        public static byte[] ConvertToByte(string value)
+        public static string Decrypt(string encryptText)
         {
-            UnicodeEncoding ByteConverter = new UnicodeEncoding();
-            return ByteConverter.GetBytes(value);
+            string decryptKey = string.Empty;
+            foreach (char item in encryptText)
+            {
+                int ascii = Convert.ToInt32(item);
+                ascii -= cryptoNumericKey;
+                char newChar = Convert.ToChar(ascii);
+                decryptKey += newChar;
+            }
+            return decryptKey;
         }
-
-        //public static string DecryptPassword(string decodePwd)
-        //{
-        //    if (decodePwd == "" || decodePwd == null)
-        //        throw new ArgumentNullException("There is no content to decrypt.");
-
-        //    SHA256Managed encryptPwd = new SHA256Managed();
-        //    encryptPwd.
-        //}
-
         #endregion
 
     }

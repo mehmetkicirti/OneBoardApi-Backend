@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Options;
 using OneBoard.Core.Utilities.Security.Encryption;
+using OneBoard.Entities.Abstract;
 using OneBoard.Entities.Concrete;
 
 namespace OneBoard.Core.Utilities.Security.Token
