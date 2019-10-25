@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OneBoard.Business.Abstract;
+using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
+using OneBoard.Entities.DTO.User;
+using OneBoard.Entities.Mapping.UserMap;
 
 namespace OneBoard.WebAPI.Controllers
 {
@@ -13,66 +20,44 @@ namespace OneBoard.WebAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public IUserService service;
+        private readonly IUserService _userService;
+        private IMapper _mapper;
 
-        public UserController(IUserService service)
+        public UserController(IUserService service , IMapper mapper)
         {
-            this.service = service;
+            this._userService = service;
+            this._mapper = mapper;
         }
-
-      [HttpPost(template:"Add")]
-      public IActionResult Add(User user)
-       {
-           var result = service.Add(user);
-
-           if (result.Success)
-          {
-                return Ok(result.Message);
-          }
-
-          return BadRequest(result.Success.ToString());
-      }
-
-        [HttpPost(template:"Update")]
-
-        public IActionResult Update(User user)
+        //only having token
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetUser()
         {
-            var result = service.Update(user);
+            IEnumerable<Claim> claims = User.Claims;
+            //getting claim tokens
+            //new Claim(ClaimType,Value);
+            string userId = claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
+            IDataResult<User> result = await _userService.FindByIdAsync(Convert.ToInt32(userId));
 
             if (result.Success)
-            {
-                return Ok(result.Message);
-            }
-
-            return BadRequest(result.Success.ToString());
-        }
-
-        [HttpPost(template: "Delete")]
-
-        public IActionResult Delete(User user)
-        {
-            var result = service.Delete(user);
-
-            if (result.Success)
-            {
-                return Ok(result.Message);
-            }
-
-            return BadRequest(result.Success.ToString());
-        }
-
-        [HttpGet(template:"GetAll")]
-        public IActionResult GetAll()
-        
-        {
-            var result = service.GetEntityValues();
-
-            if (result.Success)
-            {
                 return Ok(result.Data);
-            }
-
-            return BadRequest(result.Success.ToString());
+            else
+                return BadRequest(result.Message);
         }
+        //all
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> AddUser(UserDTO userDTO)
+        {
+            _mapper = UserMapping.GetMapper().CreateMapper();
+
+            User user = _mapper.Map<UserDTO, User>(userDTO);
+            IResult result = await _userService.AddUser(user);
+            if (result.Success)
+                return Ok($"{result.Message} : Data :{JsonConvert.SerializeObject(user)}");
+            else
+                return BadRequest(result.Message);
+        }
+
     }
 }
