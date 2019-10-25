@@ -62,6 +62,8 @@ namespace OneBoard.WebAPI
                     ValidateIssuerSigningKey=true,
                     ValidIssuer=tokenOptions.Issuer,
                     ValidAudience=tokenOptions.Audience,
+                    //For another server is important.Gecikme için tölere edilebilir.
+                    ClockSkew=TimeSpan.FromMinutes(1),
                     IssuerSigningKey=SignHandler.GetSecurityKey(tokenOptions.SecurityKey)
                 };
             });
