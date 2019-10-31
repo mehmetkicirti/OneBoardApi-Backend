@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OneBoard.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FirmController : ControllerBase
