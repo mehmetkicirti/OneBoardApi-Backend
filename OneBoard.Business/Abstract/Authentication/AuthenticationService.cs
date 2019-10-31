@@ -42,7 +42,7 @@ namespace OneBoard.Business.Abstract.Authentication
             }
             else
             {
-                return new FailDataResult<AccessToken>(BasicCrudOperationMessages.FAIL_CREATE_TOKEN);
+                return new FailDataResult<AccessToken>(BasicCrudOperationMessages.FAIL_CREATE_TOKEN + $" \n {user.Message}");
             }
 
         }

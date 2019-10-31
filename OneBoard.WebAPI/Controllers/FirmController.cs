@@ -34,7 +34,7 @@ namespace OneBoard.WebAPI.Controllers
         [HttpPost("Add")]
         public IActionResult Add(Firm firm)
         {
-            var result = _Firmservice.AddByVirtualMethod(firm);
+            var result = _Firmservice.Add(firm);
 
             if (result.Success)
             {
