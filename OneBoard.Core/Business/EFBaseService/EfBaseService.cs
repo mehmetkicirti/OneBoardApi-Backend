@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using OneBoard.Core.CrossCuttingCornces.Validation._FluentValidation;
-using OneBoard.Core.DataAccess;
+﻿using OneBoard.Core.DataAccess;
 using OneBoard.Core.Utilities;
 using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Core.Utilities.Results.Concerete.Data;
