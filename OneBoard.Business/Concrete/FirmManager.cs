@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using OneBoard.Business.Abstract;
 using OneBoard.Business.ValidationRules._FluentValidation;
+using OneBoard.Core.Aspects.Autofac.Logging;
 using OneBoard.Core.Aspects.Autofac.Validation;
 using OneBoard.Core.Business.EFBaseService;
+using OneBoard.Core.CrossCuttingCornces.Logging.Log4Net.Loggers;
 using OneBoard.Core.CrossCuttingCornces.Validation._FluentValidation;
 using OneBoard.Core.DataAccess;
 using OneBoard.Core.Utilities;
@@ -26,7 +28,8 @@ namespace OneBoard.Business.Concrete
         {
         }
 
-        [ValidationAspect(typeof(FirmValidator),Priority =1)]
+        //[ValidationAspect(typeof(FirmValidator),Priority =1)]
+        [LogAspect(typeof(DatabaseLogger))]
         public override IResult AddByVirtualMethod(Firm entity)
         {
             try
@@ -46,7 +49,8 @@ namespace OneBoard.Business.Concrete
         }
 
 
-        [ValidationAspect(typeof(FirmValidator), Priority = 1)]
+        //[ValidationAspect(typeof(FirmValidator), Priority = 1)]
+        [LogAspect(typeof(DatabaseLogger))]
         public override IResult UpdateByVirtualMethod(Firm entity)
         {
             try
