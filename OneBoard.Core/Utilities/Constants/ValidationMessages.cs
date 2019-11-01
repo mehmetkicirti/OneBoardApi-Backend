@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OneBoard.Entities.Abstract;
+using OneBoard.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +8,7 @@ namespace OneBoard.Core.Utilities.Constants
 {
     public static class ValidationMessages
     {
+
         public static string NotEmpty = "This Item can not be empty";
         public static string NotNull = "This Item can not be null";
         public static string MustBeThatRange = "This Item must be applied Interval";

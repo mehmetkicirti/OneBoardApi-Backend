@@ -4,14 +4,9 @@ using OneBoard.Core.Aspects.Autofac.Logging;
 using OneBoard.Core.Aspects.Autofac.Validation;
 using OneBoard.Core.Business.EFBaseService;
 using OneBoard.Core.CrossCuttingCornces.Logging.Log4Net.Loggers;
-using OneBoard.Core.CrossCuttingCornces.Validation._FluentValidation;
 using OneBoard.Core.DataAccess;
-using OneBoard.Core.Utilities;
-using OneBoard.Core.Utilities.Results.Abstract;
-using OneBoard.Core.Utilities.Results.Concerete.Result;
 using OneBoard.DataAccess.Abstract;
 using OneBoard.Entities.Concrete;
-using System;
 
 namespace OneBoard.Business.Concrete
 {

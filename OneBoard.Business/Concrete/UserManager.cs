@@ -1,5 +1,9 @@
 ﻿using OneBoard.Business.Abstract;
+using OneBoard.Business.ValidationRules._FluentValidation;
+using OneBoard.Core.Aspects.Autofac.Logging;
+using OneBoard.Core.Aspects.Autofac.Validation;
 using OneBoard.Core.Business.EFBaseService;
+using OneBoard.Core.CrossCuttingCornces.Logging.Log4Net.Loggers;
 using OneBoard.Core.DataAccess;
 using OneBoard.Core.Helper;
 using OneBoard.Core.Utilities;
@@ -17,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace OneBoard.Business.Concrete
 {
+
+    [LogAspect(typeof(DatabaseLogger))]
+    [ValidationAspect(typeof(UserValidator))]
     public class UserManager : EfBaseService<IUserDal, User>, IUserService
     {
         //private readonly DatabaseContext _context;
@@ -25,6 +32,7 @@ namespace OneBoard.Business.Concrete
             //_context = context;
         }
 
+       // [ValidationAspect(typeof(UserValidator))]
         public async Task<IResult> AddUser(User user)
         {
             try
@@ -41,6 +49,7 @@ namespace OneBoard.Business.Concrete
             }
         }
 
+        //[ValidationAspect(typeof(UserValidator))]
         public async Task<IDataResult<User>> FindLoginNameAndPassword(string LoginName, string Password)
         {
             try

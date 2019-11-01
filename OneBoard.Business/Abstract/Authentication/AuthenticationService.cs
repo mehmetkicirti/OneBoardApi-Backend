@@ -1,22 +1,25 @@
 ﻿using Microsoft.Extensions.Options;
+using OneBoard.Business.ValidationRules._FluentValidation;
+using OneBoard.Business.ValidationRules.ForDTOValidation;
+using OneBoard.Core.Aspects.Autofac.Logging;
+using OneBoard.Core.Aspects.Autofac.Validation;
 using OneBoard.Core.Business;
-using OneBoard.Core.Business.EFBaseService;
+using OneBoard.Core.CrossCuttingCornces.Logging.Log4Net.Loggers;
 using OneBoard.Core.DataAccess;
 using OneBoard.Core.Helper;
 using OneBoard.Core.Utilities;
 using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Core.Utilities.Results.Concerete.Data;
 using OneBoard.Core.Utilities.Security.Token;
-using OneBoard.DataAccess.Abstract;
-using OneBoard.DataAccess.EF;
 using OneBoard.Entities.Concrete;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OneBoard.Business.Abstract.Authentication
 {
+    [LogAspect(typeof(DatabaseLogger))]
+    
+    
     public class AuthenticationService : BaseAuthenticationService, IAuthenticationService<AccessToken>
     {
         private readonly TokenOptions _tokenOptions;
@@ -25,6 +28,7 @@ namespace OneBoard.Business.Abstract.Authentication
             this._tokenOptions = tokenOptions.Value;
         }
 
+        [ValidationAspect(typeof(LoginDTOValidator))]
         public async Task<IDataResult<AccessToken>> CreateAccessToken(string LoginName, string password)
         {
             string EncryptPassword = EncryptionPassword.Encrypt(password);

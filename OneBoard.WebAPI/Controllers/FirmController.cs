@@ -128,13 +128,7 @@ namespace OneBoard.WebAPI.Controllers
             }
             else
             {
-                //    MapperConfiguration config = null;
-                //    config = new MapperConfiguration(cfg =>
-                //    {
-                //        cfg.CreateMap<FirmDTO, Firm>().ForMember(f => f.Dashboards, option => option.Ignore())
-                //.ForMember(f => f.UserFirms, option => option.Ignore()).ForMember(f => f.Groups, option => option.Ignore()); ;
-                //        cfg.CreateMap<Firm, FirmDTO>();
-                //    });
+
                 _mapper = FirmMapping.GetMapper().CreateMapper();
                 //Using with Automapper mapped by Firm to FirmDTO
                 Firm firm = _mapper.Map<FirmDTO, Firm>(firmDTO);

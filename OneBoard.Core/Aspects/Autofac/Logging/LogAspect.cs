@@ -19,11 +19,11 @@ namespace OneBoard.Core.Aspects.Autofac.Logging
         }
 
 
-        public override void OnBefore(IInvocation invocation)
-        {
-            service.Info(GetLogDetail(invocation));
-            base.OnBefore(invocation);
-        }
+        //public override void OnBefore(IInvocation invocation)
+        //{
+        //    service.Info(GetLogDetail(invocation));
+        //    base.OnBefore(invocation);
+        //}
 
 
         public override void OnException(IInvocation invocation)
