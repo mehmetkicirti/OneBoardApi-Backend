@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using OneBoard.Entities.Concrete;
 using OneBoard.Entities.DTO.User;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OneBoard.Entities.Mapping.UserMap
 {

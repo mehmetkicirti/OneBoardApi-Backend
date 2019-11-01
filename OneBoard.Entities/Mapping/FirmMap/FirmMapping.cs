@@ -4,7 +4,7 @@ using OneBoard.Entities.DTO.Firm;
 
 namespace OneBoard.Entities.Mapping.FirmMap
 {
-    public class FirmMapping
+    public class FirmMapping:Profile
     {
         //public FirmMapping()
         //{
