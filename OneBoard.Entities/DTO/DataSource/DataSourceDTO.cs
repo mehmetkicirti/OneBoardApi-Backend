@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OneBoard.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OneBoard.Entities.DTO.DataSource
 {
-   public class DataSourceDTO
+   public class DataSourceDTO:IDTO
     {
         public int DataSourceTypeID { get; set; }
         public string ConnString { get; set; }
