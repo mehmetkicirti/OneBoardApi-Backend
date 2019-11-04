@@ -12,22 +12,15 @@ using System.Threading.Tasks;
 
 namespace OneBoard.Core.Business.EFBaseService
 {
-    public class EfBaseService<TDal, TEntity> :
+    public class EfBaseService<TDal, TEntity> : BaseService<TDal,TEntity>,
         IService<TEntity> where TEntity : class, IEntity, new()
         where TDal : IEntityRepository<TEntity>
     {
-        protected readonly TDal _dal;
-        protected readonly IUnitOfWork _unitOfWork;
-
-        public EfBaseService(TDal dal, IUnitOfWork unitOfWork)
+        
+        public EfBaseService(TDal dal, IUnitOfWork unitOfWork):base(dal,unitOfWork)
         {
-            _dal = dal;
-            _unitOfWork = unitOfWork;
         }
-        public EfBaseService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+       
 
         public IResult Add(TEntity entity)
         {

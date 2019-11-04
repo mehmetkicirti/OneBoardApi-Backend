@@ -31,7 +31,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
             {
                 var deleteEntity = _context.Entry(entity);
                 deleteEntity.State = EntityState.Deleted; 
-                _context.SaveChanges();
+                //_context.SaveChanges();
             }
         }
 
@@ -42,7 +42,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
                 var Entity = _context.Find<TEntity>(ID);
                 var DeleteEntity = _context.Entry(Entity);
                 DeleteEntity.State = EntityState.Deleted;
-                _context.SaveChanges();
+                //_context.SaveChanges();
             }
         }
 
@@ -86,7 +86,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
             {
                 var UpdateEntity = _context.Entry(entity);
                 UpdateEntity.State = EntityState.Modified;
-                _context.SaveChanges();
+                //_context.SaveChanges();
             }
         }
 
@@ -122,7 +122,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
                 var Entity = await _context.FindAsync<TEntity>(ID);
                 var DeleteEntity = _context.Entry(Entity);
                 DeleteEntity.State = EntityState.Deleted;
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
             }
         }
         public virtual async Task AddAsync(TEntity entity)
@@ -130,7 +130,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
             using (var _context = new TContext())
             {
                 await _context.AddAsync<TEntity>(entity);
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
             }
         }
         public async Task<IEnumerable<TEntity>> ListAsync()
