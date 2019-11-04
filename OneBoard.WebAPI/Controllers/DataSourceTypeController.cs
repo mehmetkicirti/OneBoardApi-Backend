@@ -3,44 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OneBoard.Business.Abstract;
 using OneBoard.Core.Utilities.Extensions;
 using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
-using OneBoard.Entities.DTO.DataSource;
-using OneBoard.Entities.Mapping.DataSourceMap;
+using OneBoard.Entities.DTO.DataSourceType;
+using OneBoard.Entities.Mapping.DataSourceTypeMap;
 
 namespace OneBoard.WebAPI.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class DataSourceController : ControllerBase
+    public class DataSourceTypeController : ControllerBase
     {
-        private IDataSourceService _iDataSourceService;
+        private IDataSourceTypeService _iDataSourceTypeService;
         private IMapper _iMapper;
-        
-        public DataSourceController(IDataSourceService dataSourceService, IMapper mapper)
+
+        public DataSourceTypeController(IDataSourceTypeService dataSourceTypeService, IMapper mapper)
         {
-            _iDataSourceService = dataSourceService;
+            _iDataSourceTypeService = dataSourceTypeService;
             _iMapper = mapper;
         }
 
         #region NORMAL
         [HttpPost("Add")]
-        public IActionResult Add(DataSourceDTO dataSourceDTO)
+        public IActionResult Add(DataSourceTypeDTO dataSourceDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                _iMapper = DataSourceMapping.GetMapper().CreateMapper();
-                DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
+                _iMapper = DataSourceTypeMapping.GetMapper().CreateMapper();
+                DataSourceType dataSource = _iMapper.Map<DataSourceTypeDTO, DataSourceType>(dataSourceDTO);
 
-                IResult result = _iDataSourceService.Add(dataSource);
+                IResult result = _iDataSourceTypeService.Add(dataSource);
 
                 if (result.Success)
                     return Ok(result.Message);
@@ -50,21 +48,21 @@ namespace OneBoard.WebAPI.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(DataSourceDTO dataSourceDTO, int Id)
+        public IActionResult Update(DataSourceTypeDTO dataSourceTypeDTO, int Id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                IDataResult<DataSource> result = _iDataSourceService.GetById(Id);
+                IDataResult<DataSourceType> result = _iDataSourceTypeService.GetById(Id);
                 if (result == null)
                     return BadRequest(result.Message);
                 else
                 {
-                    _iMapper = DataSourceMapping.GetMapper().CreateMapper();
-                    DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
+                    _iMapper = DataSourceTypeMapping.GetMapper().CreateMapper();
+                    DataSourceType dataSource = _iMapper.Map<DataSourceTypeDTO, DataSourceType>(dataSourceTypeDTO);
 
-                    IResult updateResult = _iDataSourceService.Update(dataSource);
+                    IResult updateResult = _iDataSourceTypeService.Update(dataSource);
 
                     if (updateResult.Success)
                         return Ok(updateResult.Message);
@@ -80,12 +78,12 @@ namespace OneBoard.WebAPI.Controllers
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                IDataResult<DataSource> result = _iDataSourceService.GetById(Id);
+                IDataResult<DataSourceType> result = _iDataSourceTypeService.GetById(Id);
                 if (result == null)
                     return BadRequest(result.Message);
                 else
                 {
-                    IResult deleteResult = _iDataSourceService.Delete(result.Data);
+                    IResult deleteResult = _iDataSourceTypeService.Delete(result.Data);
                     if (deleteResult.Success)
                         return Ok(deleteResult.Message);
                     else
@@ -93,10 +91,10 @@ namespace OneBoard.WebAPI.Controllers
                 }
             }
         }
-        [HttpGet(template:"GetAll")]
+        [HttpGet(template: "GetAll")]
         public IActionResult GetAll()
         {
-            IDataResult<IList<DataSource>> result = _iDataSourceService.GetEntityValues();
+            IDataResult<IList<DataSourceType>> result = _iDataSourceTypeService.GetEntityValues();
 
             if (result.Success)
                 return Ok(result.Data);
@@ -108,38 +106,38 @@ namespace OneBoard.WebAPI.Controllers
         #endregion
 
         #region Async
-        [HttpGet(template:"getListAsync")]
+        [HttpGet(template: "getListAsync")]
         public async Task<IActionResult> GetListAsync()
         {
-            IDataResult<IList<DataSource>> result = await _iDataSourceService.GetEntityValuesAsync();
+            IDataResult<IList<DataSourceType>> result = await _iDataSourceTypeService.GetEntityValuesAsync();
 
             if (result.Success)
                 return Ok(result.Data);
             return BadRequest(result.Message);
         }
 
-        [HttpGet(template:"getByIdAsync/{id:int}")]
+        [HttpGet(template: "getByIdAsync/{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            IDataResult<DataSource> result = await _iDataSourceService.FindByIdAsync(id);
+            IDataResult<DataSourceType> result = await _iDataSourceTypeService.FindByIdAsync(id);
             if (result.Success)
                 return Ok(result.Data);
             return BadRequest(result.Message);
-            
+
         }
 
-        [HttpPost(template:"addAsync")]
-        public async Task<IActionResult> AddAsync(DataSourceDTO dataSourceDTO)
+        [HttpPost(template: "addAsync")]
+        public async Task<IActionResult> AddAsync(DataSourceTypeDTO dataSourceTypeDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                _iMapper = DataSourceMapping.GetMapper().CreateMapper();
+                _iMapper = DataSourceTypeMapping.GetMapper().CreateMapper();
 
-                DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
+                DataSourceType dataSourceType = _iMapper.Map<DataSourceTypeDTO, DataSourceType>(dataSourceTypeDTO);
 
-                IResult result = await _iDataSourceService.AddAsync(dataSource);
+                IResult result = await _iDataSourceTypeService.AddAsync(dataSourceType);
 
                 if (result.Success)
                     return Ok(result.Message);
@@ -147,32 +145,32 @@ namespace OneBoard.WebAPI.Controllers
             }
         }
 
-        [HttpPut(template:"updateAsync/{id:int}")]
-        public async Task<IActionResult> UpdateAsync(DataSourceDTO dataSourceDTO, int Id)
+        [HttpPut(template: "updateAsync/{id:int}")]
+        public async Task<IActionResult> UpdateAsync(DataSourceTypeDTO dataSourceTypeDTO, int Id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                IDataResult<DataSource> dataResult = await _iDataSourceService.FindByIdAsync(Id);
+                IDataResult<DataSourceType> dataResult = await _iDataSourceTypeService.FindByIdAsync(Id);
                 if (dataResult.Data == null)
                     return BadRequest(dataResult.Message);
-                _iMapper = DataSourceMapping.GetMapper().CreateMapper();
+                _iMapper = DataSourceTypeMapping.GetMapper().CreateMapper();
 
-                DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
-                 
-                IResult result  = await _iDataSourceService.UpdateAsync(dataSource);
+                DataSourceType dataSourceType = _iMapper.Map<DataSourceTypeDTO, DataSourceType>(dataSourceTypeDTO);
+
+                IResult result = await _iDataSourceTypeService.UpdateAsync(dataSourceType);
                 if (result.Success)
                     return Ok(result.Message);
                 return BadRequest(result.Message);
             }
-            
+
         }
 
         [HttpDelete(template: "deleteAsync/{id:int}")]
         public async Task<IActionResult> DeleteAsync(int Id)
         {
-            var result = await _iDataSourceService.DeleteByIdAsync(Id);
+            var result = await _iDataSourceTypeService.DeleteByIdAsync(Id);
             if (result.Success)
             {
                 return Ok(result.Message);
