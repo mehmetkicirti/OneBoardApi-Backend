@@ -149,14 +149,20 @@ namespace OneBoard.Core.DataAccess.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(int ID)
+        public async Task UpdateAsync(TEntity entity)
         {
             using (var _context = new TContext())
             {
-                var entity = await _context.FindAsync<TEntity>(ID);
-                var UpdateItem = _context.Entry(entity);
-                UpdateItem.State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                //var entity = await this.FindByIdAsync(Id);
+                
+                var t = Task.Run(() =>
+                {
+                    var UpdateItem = _context.Entry(entity);
+                    UpdateItem.State = EntityState.Modified;
+                    _context.SaveChanges();
+                });
+                
+                await t;
             }
         }
         #endregion

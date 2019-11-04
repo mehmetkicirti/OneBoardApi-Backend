@@ -47,10 +47,10 @@ namespace OneBoard.WebAPI.Controllers
             return BadRequest(result.Success.ToString() + "and " + result.Message);
         }
 
-       [HttpPost("Update")]
+       [HttpPut("Update")]
        public IActionResult Update(Firm firm)
        {
-          var result = _Firmservice.UpdateByVirtualMethod(firm);
+          var result = _Firmservice.Update(firm);
 
           if (result.Success)
           {
@@ -106,7 +106,7 @@ namespace OneBoard.WebAPI.Controllers
             }
         }
         //localhost/api/firm/2 => this method execute.
-        [HttpGet(template: "getbyidAsync/{id:int}")]
+        [HttpGet(template: "getByIdAsync/{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int Id)
         {
             IDataResult<Firm> FirmResult = await _Firmservice.FindByIdAsync(Id);
@@ -123,7 +123,7 @@ namespace OneBoard.WebAPI.Controllers
         #region Post
         //localhost/api/firm/addfirmasync
         [HttpPost(template: "addfirmAsync")]
-        public async Task<IActionResult> AddFirmAsync(FirmDTO firmDTO)
+        public async Task<IActionResult> AddAsync(FirmDTO firmDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -152,7 +152,7 @@ namespace OneBoard.WebAPI.Controllers
             }
         }
         [HttpPut(template: "updatefirmAsync/{id:int}")]
-        public async Task<IActionResult> UpdateFirmAsync(FirmDTO firmDTO, int Id)
+        public async Task<IActionResult> UpdateAsync(FirmDTO firmDTO, int Id)
         {
             if (!ModelState.IsValid)
             {
@@ -161,13 +161,14 @@ namespace OneBoard.WebAPI.Controllers
             else
             {
                 IDataResult<Firm> firmDataResult = await _Firmservice.FindByIdAsync(Id);
-                if (firmDataResult == null)
+                if (firmDataResult.Data == null)
                 {
                     return BadRequest(firmDataResult.Message);
                 }
                 _mapper = FirmMapping.GetMapper().CreateMapper();
-                Firm firm = _mapper.Map<FirmDTO,Firm>(firmDTO);
-                IResult firmResult = await _Firmservice.UpdateAsync(Id);
+                Firm firm = _mapper.Map<FirmDTO, Firm>(firmDTO);
+                firm.ID = firmDataResult.Data.ID;
+                IResult firmResult = await _Firmservice.UpdateAsync(firm);
                 if (firmResult.Success)
                 {
                     return Ok(firmResult.Message);
@@ -179,7 +180,7 @@ namespace OneBoard.WebAPI.Controllers
             }
         }
         [HttpDelete(template: "deletefirmAsync/{id:int}")]
-        public async Task<IActionResult> DeleteFirmAsync(int Id)
+        public async Task<IActionResult> DeleteAsync(int Id)
         {
             var result = await _Firmservice.DeleteByIdAsync(Id);
             if (result.Success)
