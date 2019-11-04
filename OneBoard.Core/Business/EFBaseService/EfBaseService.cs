@@ -123,6 +123,7 @@ namespace OneBoard.Core.Business.EFBaseService
         #region async
         public async Task<IResult> AddAsync(TEntity entity)
         {
+
             try
             {
                 await _dal.AddAsync(entity);
@@ -150,6 +151,7 @@ namespace OneBoard.Core.Business.EFBaseService
                     await _unitOfWork.CompleteAsync();
                     return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
                 }
+
             }
             catch (Exception ex)
             {

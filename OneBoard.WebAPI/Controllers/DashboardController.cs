@@ -6,38 +6,32 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OneBoard.Business.Abstract;
+using OneBoard.Core.Utilities.Extensions;
 using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
-using OneBoard.Entities.DTO.Firm;
-using OneBoard.Core.Utilities.Extensions;
-using OneBoard.Entities.Mapping.FirmMap;
-using Microsoft.AspNetCore.Authorization;
+using OneBoard.Entities.DTO.Dashboard;
+using OneBoard.Entities.Mapping.DashboardMap;
 
 namespace OneBoard.WebAPI.Controllers
 {
-    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class FirmController : ControllerBase
+    public class DashboardController : ControllerBase
     {
-        private readonly IFirmService _Firmservice;
+        private readonly IDashboardService _Dashboardservice;
         private IMapper _mapper;
-        
-        public FirmController(IFirmService Firmservice,IMapper mapper)
+
+        public DashboardController(IDashboardService dashboardservice, IMapper mapper)
         {
-            this._Firmservice = Firmservice;
+            this._Dashboardservice = dashboardservice;
             this._mapper = mapper;
         }
 
-
         #region normal
         [HttpPost("Add")]
-        public IActionResult Add(FirmDTO firmDto)
+        public IActionResult Add(Dashboard dashboard)
         {
-            _mapper = FirmMapping.GetMapper().CreateMapper();
-            Firm firm = _mapper.Map<FirmDTO, Firm>(firmDto);
-
-            var result = _Firmservice.Add(firm);
+            var result = _Dashboardservice.Add(dashboard);
 
             if (result.Success)
             {
@@ -47,24 +41,24 @@ namespace OneBoard.WebAPI.Controllers
             return BadRequest(result.Success.ToString() + "and " + result.Message);
         }
 
-       [HttpPost("Update")]
-       public IActionResult Update(Firm firm)
-       {
-          var result = _Firmservice.UpdateByVirtualMethod(firm);
+        [HttpPost("Update")]
+        public IActionResult Update(Dashboard dashboard)
+        {
+            var result = _Dashboardservice.Update(dashboard);
 
-          if (result.Success)
-          {
+            if (result.Success)
+            {
                 return Ok(result.Message);
-          }
+            }
 
             return BadRequest(result.Success.ToString() + "and " + result.Message);
         }
-          
+
 
         [HttpPost("Delete")]
-        public IActionResult Delete(Firm firm)
+        public IActionResult Delete(Dashboard dashboard)
         {
-            var result = _Firmservice.Delete(firm);
+            var result = _Dashboardservice.Delete(dashboard);
 
             if (result.Success)
             {
@@ -77,8 +71,8 @@ namespace OneBoard.WebAPI.Controllers
         [HttpGet(template: "GetAll")]
         public IActionResult GetAll()
         {
-            
-            var result = _Firmservice.GetEntityValues();
+
+            var result = _Dashboardservice.GetEntityValues();
 
             if (result.Success)
             {
@@ -91,39 +85,38 @@ namespace OneBoard.WebAPI.Controllers
 
         #region async
         #region Get
-
         [HttpGet(template: "getlistAsync")]
         public async Task<IActionResult> GetListAsync()
         {
-            IDataResult<IList<Firm>> FirmListResult = await _Firmservice.GetEntityValuesAsync();
-            if (FirmListResult.Success)
+            IDataResult<IList<Dashboard>> DashboardListResult = await _Dashboardservice.GetEntityValuesAsync();
+            if (DashboardListResult.Success)
             {
-                return Ok(FirmListResult.Data);
+                return Ok(DashboardListResult.Data);
             }
             else
             {
-                return BadRequest(FirmListResult.Message);
+                return BadRequest(DashboardListResult.Message);
             }
         }
         //localhost/api/firm/2 => this method execute.
         [HttpGet(template: "getbyidAsync/{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int Id)
         {
-            IDataResult<Firm> FirmResult = await _Firmservice.FindByIdAsync(Id);
-            if (FirmResult.Success)
+            IDataResult<Dashboard> DashboardResult = await _Dashboardservice.FindByIdAsync(Id);
+            if (DashboardResult.Success)
             {
-                return Ok(FirmResult.Data);
+                return Ok(DashboardResult.Data);
             }
             else
             {
-                return BadRequest(FirmResult.Message);
+                return BadRequest(DashboardResult.Message);
             }
         }
         #endregion
-        #region Post
+        #region PostPut
         //localhost/api/firm/addfirmasync
         [HttpPost(template: "addfirmAsync")]
-        public async Task<IActionResult> AddFirmAsync(FirmDTO firmDTO)
+        public async Task<IActionResult> AddFirmAsync(DashboardDTO dashboardDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -132,27 +125,21 @@ namespace OneBoard.WebAPI.Controllers
             else
             {
 
-                _mapper = FirmMapping.GetMapper().CreateMapper();
-                //Using with Automapper mapped by Firm to FirmDTO
-                Firm firm = _mapper.Map<FirmDTO, Firm>(firmDTO);
-                //Firm firm = new Firm();
-
-                //firm.FirmName = firmDTO.FirmName;
-                //firm.ParentID = firmDTO.ParentID; //instead of this
-
-                var FirmResult = await _Firmservice.AddAsync(firm);
-                if (FirmResult.Success)
+                _mapper = DashboardMapping.GetMapper().CreateMapper();
+                Dashboard dashboard = _mapper.Map<DashboardDTO,Dashboard>(dashboardDTO);
+                var DashboardResult = await _Dashboardservice.AddAsync(dashboard);
+                if (DashboardResult.Success)
                 {
-                    return Ok(FirmResult.Message);
+                    return Ok(DashboardResult.Message);
                 }
                 else
                 {
-                    return BadRequest(FirmResult.Message);
+                    return BadRequest(DashboardResult.Message);
                 }
             }
         }
         [HttpPut(template: "updatefirmAsync/{id:int}")]
-        public async Task<IActionResult> UpdateFirmAsync(FirmDTO firmDTO, int Id)
+        public async Task<IActionResult> UpdateFirmAsync(DashboardDTO dashboardDTO, int Id)
         {
             if (!ModelState.IsValid)
             {
@@ -160,28 +147,30 @@ namespace OneBoard.WebAPI.Controllers
             }
             else
             {
-                IDataResult<Firm> firmDataResult = await _Firmservice.FindByIdAsync(Id);
-                if (firmDataResult == null)
+                IDataResult<Dashboard> DashboardResult = await _Dashboardservice.FindByIdAsync(Id);
+                if (DashboardResult==null)
                 {
-                    return BadRequest(firmDataResult.Message);
+                    return BadRequest(DashboardResult.Message);
                 }
-                _mapper = FirmMapping.GetMapper().CreateMapper();
-                Firm firm = _mapper.Map<FirmDTO,Firm>(firmDTO);
-                IResult firmResult = await _Firmservice.UpdateAsync(Id);
-                if (firmResult.Success)
+
+                _mapper = DashboardMapping.GetMapper().CreateMapper();
+                Dashboard dashboard = _mapper.Map<DashboardDTO, Dashboard>(dashboardDTO);
+                var Dashboardresult = await _Dashboardservice.AddAsync(dashboard);
+                if (Dashboardresult.Success)
                 {
-                    return Ok(firmResult.Message);
+                    return Ok(Dashboardresult.Message);
                 }
                 else
                 {
-                    return BadRequest(firmResult.Message);
+                    return BadRequest(Dashboardresult.Message);
                 }
+
             }
         }
         [HttpDelete(template: "deletefirmAsync/{id:int}")]
         public async Task<IActionResult> DeleteFirmAsync(int Id)
         {
-            var result = await _Firmservice.DeleteByIdAsync(Id);
+            var result = await _Dashboardservice.DeleteByIdAsync(Id);
             if (result.Success)
             {
                 return Ok(result.Message);
@@ -191,7 +180,11 @@ namespace OneBoard.WebAPI.Controllers
                 return BadRequest(result.Message);
             }
         }
+
         #endregion
         #endregion
+
+
+
     }
 }

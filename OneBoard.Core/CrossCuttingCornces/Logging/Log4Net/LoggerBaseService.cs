@@ -28,19 +28,19 @@ namespace OneBoard.Core.CrossCuttingCornces.Logging.Log4Net
 
 
         private bool IsDebugEnabled => log.IsDebugEnabled;
-        private bool IsInfoEnabled => log.IsInfoEnabled;
+        //private bool IsInfoEnabled => log.IsInfoEnabled;
         private bool IsErrorEnabled => log.IsErrorEnabled;
         private bool IsFatalEnabled => log.IsFatalEnabled;
         private bool IsWarnEnabled => log.IsWarnEnabled;
 
 
-        public void Info(object logMessage)
-        {
-            if (IsInfoEnabled)
-            {
-                log.Info(logMessage);
-            }
-        }
+        //public void Info(object logMessage)
+        //{
+        //    if (IsInfoEnabled)
+        //    {
+        //        log.Info(logMessage);
+        //    }
+        //}
 
         public void Debug(object logMessage)
         {
