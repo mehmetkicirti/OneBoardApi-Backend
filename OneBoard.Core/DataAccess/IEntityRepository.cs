@@ -19,7 +19,7 @@ namespace OneBoard.Core.DataAccess
         void Add(TEntity entity);
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
-        Task UpdateAsync(int ID);
+        Task UpdateAsync(TEntity entity);
         void Delete(TEntity entity);
         //Task DeleteAsync(TEntity entity);
         void DeleteById(int ID);

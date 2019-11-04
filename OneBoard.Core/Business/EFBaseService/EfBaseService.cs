@@ -135,21 +135,21 @@ namespace OneBoard.Core.Business.EFBaseService
                 return new FailResult(e.Message);
             }
         }
-        public async Task<IResult> UpdateAsync(int Id)
+        public async Task<IResult> UpdateAsync(TEntity entity)
         {
             try
             {
-                TEntity entity = await _dal.FindByIdAsync(Id);
-                if (entity == null)
-                {
-                    return new FailDataResult<TEntity>($"{BasicCrudOperationMessages.NOT_FOUND_ENTİTY} :That belonging to {Id} any entity.");
-                }
-                else
-                {
-                    await _dal.UpdateAsync(Id);
+                ////TEntity entity = await _dal.FindByIdAsync(Id);
+                ////if (entity == null)
+                ////{
+                ////    return new FailDataResult<TEntity>($"{BasicCrudOperationMessages.NOT_FOUND_ENTİTY} :That belonging to {Id} any entity.");
+                ////}
+                //else
+                //{
+                    await _dal.UpdateAsync(entity);
                     await _unitOfWork.CompleteAsync();
                     return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
-                }
+                
             }
             catch (Exception ex)
             {
@@ -220,62 +220,7 @@ namespace OneBoard.Core.Business.EFBaseService
 
 
 
-        #region virtual Extend Methods
-
-       public virtual IResult AddByVirtualMethod(TEntity entity)
-       { 
-            throw new NotImplementedException();
-       }
-
-        public virtual IResult DeleteByVirtualMethod(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IResult UpdateByVirtualMethod(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IDataResult<List<TEntity>> GetListByVirtualMethod()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IDataResult<IQueryable<TEntity>> GetQueryableByVirtualMethod()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<IResult> AddAsyncByVirtualMethod(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<IResult> DeleteAsyncByVirtualMethod(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<IResult> UpdateAsyncByVirtualMethod(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<IDataResult<IList<TEntity>>> GetEntityValuesAsyncByVirtualMethod()
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
-
-
-
-        #endregion
-
+     
 
 
 
