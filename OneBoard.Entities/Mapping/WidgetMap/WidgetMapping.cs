@@ -9,7 +9,7 @@ namespace OneBoard.Entities.Mapping.WidgetMap
 {
     public class WidgetMapping : Profile
     {
-        static MapperConfiguration GetMapper()
+        public static MapperConfiguration GetMapper()
         {
             MapperConfiguration config;
 

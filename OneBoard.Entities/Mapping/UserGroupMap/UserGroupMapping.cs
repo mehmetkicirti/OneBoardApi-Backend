@@ -9,7 +9,7 @@ namespace OneBoard.Entities.Mapping.UserGroupMap
 {
     public class UserGroupMapping:Profile
     {
-        static MapperConfiguration GetMapper()
+        public static MapperConfiguration GetMapper()
         {
             MapperConfiguration config;
 
