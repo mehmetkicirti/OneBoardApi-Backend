@@ -10,10 +10,15 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
             RuleFor(g => g.Firm)
                 .SetValidator(new FirmValidator());
 
+            //RuleFor(g=>g.UserGroups)
+                //.SetValidator(new User)
+
+
 
             RuleFor(g => g.GroupName)
                 .NotNull()
                 .Must(groupname => groupname.Contains("Grup") | groupname.Contains("Holding"))
+                .MinimumLength(3)
                 .WithMessage("Error");
 
 

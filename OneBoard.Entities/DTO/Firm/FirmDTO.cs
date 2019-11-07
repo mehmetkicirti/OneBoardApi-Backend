@@ -7,7 +7,7 @@ namespace OneBoard.Entities.DTO.Firm
 {
     public class FirmDTO:IDTO
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public int? ParentID { get; set; }
         public string FirmName { get; set; }
 

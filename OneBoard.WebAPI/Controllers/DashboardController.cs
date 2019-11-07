@@ -29,8 +29,11 @@ namespace OneBoard.WebAPI.Controllers
 
         #region normal
         [HttpPost("Add")]
-        public IActionResult Add(Dashboard dashboard)
+        public IActionResult Add(DashboardDTO dashboardDto)
         {
+            _mapper = DashboardMapping.GetMapper().CreateMapper();
+            Dashboard dashboard = _mapper.Map<DashboardDTO,Dashboard>(dashboardDto);
+
             var result = _Dashboardservice.Add(dashboard);
 
             if (result.Success)
@@ -42,8 +45,10 @@ namespace OneBoard.WebAPI.Controllers
         }
 
         [HttpPost("Update")]
-        public IActionResult Update(Dashboard dashboard)
+        public IActionResult Update(DashboardDTO dashboardDto)
         {
+            _mapper = DashboardMapping.GetMapper().CreateMapper();
+            Dashboard dashboard = _mapper.Map<DashboardDTO, Dashboard>(dashboardDto);
             var result = _Dashboardservice.Update(dashboard);
 
             if (result.Success)

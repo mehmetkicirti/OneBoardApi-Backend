@@ -48,9 +48,13 @@ namespace OneBoard.WebAPI.Controllers
         }
 
        [HttpPut("Update")]
-       public IActionResult Update(Firm firm)
+       public IActionResult Update(FirmDTO firmDto)
        {
-          var result = _Firmservice.Update(firm);
+           _mapper = FirmMapping.GetMapper().CreateMapper();
+           Firm firm = _mapper.Map<FirmDTO, Firm>(firmDto);
+
+            var result = _Firmservice.Update(firm);
+          
 
           if (result.Success)
           {

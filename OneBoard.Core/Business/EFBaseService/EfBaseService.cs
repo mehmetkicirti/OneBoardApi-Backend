@@ -150,13 +150,9 @@ namespace OneBoard.Core.Business.EFBaseService
                     await _dal.UpdateAsync(entity);
                     await _unitOfWork.CompleteAsync();
                     return new SuccessResult(BasicCrudOperationMessages.SUCCESS_UPDATE);
-<<<<<<< HEAD
-                }
 
-=======
-                
->>>>>>> a2e2ae97462693378df8444b84b2d3ea49cf1f08
-            }
+                }
+            
             catch (Exception ex)
             {
                 return new FailResult(ex.Message);
