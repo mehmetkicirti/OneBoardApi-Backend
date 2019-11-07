@@ -9,7 +9,7 @@ namespace OneBoard.Entities.Mapping.DataSourceTypeMap
 {
     public class DataSourceTypeMapping:Profile
     {
-        static MapperConfiguration GetMapper()
+        public static MapperConfiguration GetMapper()
         {
             MapperConfiguration config;
 

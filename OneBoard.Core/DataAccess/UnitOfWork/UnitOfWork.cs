@@ -14,6 +14,7 @@ namespace OneBoard.Core.DataAccess.UnitOfWork
         public UnitOfWork(TContext context)
         {
             this._context = context;
+            Console.WriteLine(context);
         }
 
         public async Task CompleteAsync()

@@ -3,44 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OneBoard.Business.Abstract;
 using OneBoard.Core.Utilities.Extensions;
 using OneBoard.Core.Utilities.Results.Abstract;
 using OneBoard.Entities.Concrete;
-using OneBoard.Entities.DTO.DataSource;
-using OneBoard.Entities.Mapping.DataSourceMap;
+using OneBoard.Entities.DTO.DataSourceType;
+using OneBoard.Entities.DTO.Widget;
+using OneBoard.Entities.Mapping.WidgetMap;
 
 namespace OneBoard.WebAPI.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class DataSourceController : ControllerBase
+    public class WidgetController : ControllerBase
     {
-        private IDataSourceService _iDataSourceService;
+        private IWidgetService _iWidgetService;
         private IMapper _iMapper;
-        
-        public DataSourceController(IDataSourceService dataSourceService, IMapper mapper)
+
+        public WidgetController(IWidgetService widgetService, IMapper mapper)
         {
-            _iDataSourceService = dataSourceService;
+            _iWidgetService = widgetService;
             _iMapper = mapper;
         }
 
         #region NORMAL
         [HttpPost("Add")]
-        public IActionResult Add(DataSourceDTO dataSourceDTO)
+        public IActionResult Add(WidgetDTO widgetDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                _iMapper = DataSourceMapping.GetMapper().CreateMapper();
-                DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
+                _iMapper = WidgetMapping.GetMapper().CreateMapper();
+                Widget widget = _iMapper.Map<WidgetDTO, Widget>(widgetDTO);
 
-                IResult result = _iDataSourceService.Add(dataSource);
+                IResult result = _iWidgetService.Add(widget);
 
                 if (result.Success)
                     return Ok(result.Message);
@@ -50,21 +49,21 @@ namespace OneBoard.WebAPI.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(DataSourceDTO dataSourceDTO, int Id)
+        public IActionResult Update(WidgetDTO widgetDTO, int Id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                IDataResult<DataSource> result = _iDataSourceService.GetById(Id);
+                IDataResult<Widget> result = _iWidgetService.GetById(Id);
                 if (result == null)
                     return BadRequest(result.Message);
                 else
                 {
-                    _iMapper = DataSourceMapping.GetMapper().CreateMapper();
-                    DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
+                    _iMapper = WidgetMapping.GetMapper().CreateMapper();
+                    Widget widget = _iMapper.Map<WidgetDTO, Widget>(widgetDTO);
 
-                    IResult updateResult = _iDataSourceService.Update(dataSource);
+                    IResult updateResult = _iWidgetService.Update(widget);
 
                     if (updateResult.Success)
                         return Ok(updateResult.Message);
@@ -80,12 +79,12 @@ namespace OneBoard.WebAPI.Controllers
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                IDataResult<DataSource> result = _iDataSourceService.GetById(Id);
+                IDataResult<Widget> result = _iWidgetService.GetById(Id);
                 if (result == null)
                     return BadRequest(result.Message);
                 else
                 {
-                    IResult deleteResult = _iDataSourceService.Delete(result.Data);
+                    IResult deleteResult = _iWidgetService.Delete(result.Data);
                     if (deleteResult.Success)
                         return Ok(deleteResult.Message);
                     else
@@ -93,10 +92,10 @@ namespace OneBoard.WebAPI.Controllers
                 }
             }
         }
-        [HttpGet(template:"GetAll")]
+        [HttpGet(template: "GetAll")]
         public IActionResult GetAll()
         {
-            IDataResult<IList<DataSource>> result = _iDataSourceService.GetEntityValues();
+            IDataResult<IList<Widget>> result = _iWidgetService.GetEntityValues();
 
             if (result.Success)
                 return Ok(result.Data);
@@ -108,38 +107,38 @@ namespace OneBoard.WebAPI.Controllers
         #endregion
 
         #region Async
-        [HttpGet(template:"getListAsync")]
+        [HttpGet(template: "getListAsync")]
         public async Task<IActionResult> GetListAsync()
         {
-            IDataResult<IList<DataSource>> result = await _iDataSourceService.GetEntityValuesAsync();
+            IDataResult<IList<Widget>> result = await _iWidgetService.GetEntityValuesAsync();
 
             if (result.Success)
                 return Ok(result.Data);
             return BadRequest(result.Message);
         }
 
-        [HttpGet(template:"getByIdAsync/{id:int}")]
+        [HttpGet(template: "getByIdAsync/{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            IDataResult<DataSource> result = await _iDataSourceService.FindByIdAsync(id);
+            IDataResult<Widget> result = await _iWidgetService.FindByIdAsync(id);
             if (result.Success)
                 return Ok(result.Data);
             return BadRequest(result.Message);
-            
+
         }
 
-        [HttpPost(template:"addAsync")]
-        public async Task<IActionResult> AddAsync(DataSourceDTO dataSourceDTO)
+        [HttpPost(template: "addAsync")]
+        public async Task<IActionResult> AddAsync(WidgetDTO widgetDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                _iMapper = DataSourceMapping.GetMapper().CreateMapper();
+                _iMapper = WidgetMapping.GetMapper().CreateMapper();
 
-                DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
+                Widget widget = _iMapper.Map<WidgetDTO, Widget>(widgetDTO);
 
-                IResult result = await _iDataSourceService.AddAsync(dataSource);
+                IResult result = await _iWidgetService.AddAsync(widget);
 
                 if (result.Success)
                     return Ok(result.Message);
@@ -147,32 +146,32 @@ namespace OneBoard.WebAPI.Controllers
             }
         }
 
-        [HttpPut(template:"updateAsync/{id:int}")]
-        public async Task<IActionResult> UpdateAsync(DataSourceDTO dataSourceDTO, int Id)
+        [HttpPut(template: "updateAsync/{id:int}")]
+        public async Task<IActionResult> UpdateAsync(WidgetDTO widgetDTO, int Id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessage());
             else
             {
-                IDataResult<DataSource> dataResult = await _iDataSourceService.FindByIdAsync(Id);
+                IDataResult<Widget> dataResult = await _iWidgetService.FindByIdAsync(Id);
                 if (dataResult.Data == null)
                     return BadRequest(dataResult.Message);
-                _iMapper = DataSourceMapping.GetMapper().CreateMapper();
+                _iMapper = WidgetMapping.GetMapper().CreateMapper();
 
-                DataSource dataSource = _iMapper.Map<DataSourceDTO, DataSource>(dataSourceDTO);
-                 
-                IResult result  = await _iDataSourceService.UpdateAsync(dataSource);
+                Widget widget= _iMapper.Map<WidgetDTO, Widget>(widgetDTO);
+
+                IResult result = await _iWidgetService.UpdateAsync(widget);
                 if (result.Success)
                     return Ok(result.Message);
                 return BadRequest(result.Message);
             }
-            
+
         }
 
         [HttpDelete(template: "deleteAsync/{id:int}")]
         public async Task<IActionResult> DeleteAsync(int Id)
         {
-            var result = await _iDataSourceService.DeleteByIdAsync(Id);
+            var result = await _iWidgetService.DeleteByIdAsync(Id);
             if (result.Success)
             {
                 return Ok(result.Message);
