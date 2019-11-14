@@ -62,7 +62,9 @@ namespace OneBoard.Core.Utilities.Security.Token
         {
             var claims = new List<Claim> {
             new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
-            new Claim("UserType", user.UserType.ToString()),
+            new Claim("isAdmin", user.isAdmin.ToString()),
+            new Claim("isDesigner", user.isDesigner.ToString()),
+            new Claim("isManager", user.isManager.ToString()),
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim("LoginName", user.LoginName.ToString()),
             new Claim("LastLogin", user.LastLogin.ToString()),

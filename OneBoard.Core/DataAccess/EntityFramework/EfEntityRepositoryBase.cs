@@ -159,7 +159,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
                 {
                     var UpdateItem = _context.Entry(entity);
                     UpdateItem.State = EntityState.Modified;
-                    _context.SaveChanges();
+                    //_context.SaveChanges();
                 });
                 
                 await t;
