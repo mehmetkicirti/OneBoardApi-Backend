@@ -1,10 +1,7 @@
 ﻿using FluentValidation;
-using OneBoard.Business.ValidationRules.Model;
+using OneBoard.Business.ValidationRules.ValidatorModels;
 using OneBoard.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+
 
 namespace OneBoard.Business.ValidationRules._FluentValidation
 {
@@ -92,6 +89,7 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
 
             #region QueryStringRules
 
+            #region unnecessary Query String Rules
             //RuleFor(dataSource => dataSource.QueryString).Custom((queryString, context) =>
             //{
             //   if (SqlCommandValidator.TruncateSqlCommandValidatorByRegex(queryString))
@@ -206,6 +204,8 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
 
             //});
 
+            #endregion
+
             RuleFor(dataSource => dataSource.QueryString)
                 .Must(queryString => SqlCommandValidator.SelectCommandValidatorByRegex(queryString)
                 || SqlCommandValidator.InsertCommandValidatorByRegex(queryString)).WithMessage("Regular Expression Hatası");
@@ -215,10 +215,7 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
                 .Must(queryString => queryString == "Select" || queryString == "SELECT" || queryString == "select"
                 || queryString == "Insert" || queryString == "INSERT" || queryString == "insert").WithMessage("Yazımlar böyle olmamalı");
 
-                
-                
-
-
+               
 
             #endregion
         }

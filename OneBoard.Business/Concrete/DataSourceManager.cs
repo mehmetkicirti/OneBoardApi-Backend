@@ -18,15 +18,14 @@ using System.Threading.Tasks;
 
 namespace OneBoard.Business.Concrete
 {
-<<<<<<< HEAD
+
 
     
     [ValidationAspect(typeof(DataSourceValidator))]
     //[ValidationAspect(typeof(DataSourceDTOValidator))]
-    public class DataSourceManager : EfBaseService<IDataSourceDal, DataSource>, IDataSourceService
-=======
+   
+
     public class DataSourceManager : BaseService<IDataSourceDal, DataSource>, IDataSourceService
->>>>>>> 89441039f06f03fd1dbe70325c90970fefc607bf
     {
         public DataSourceManager(IDataSourceDal dal, IUnitOfWork unitOfWork) : base(dal, unitOfWork)
         {

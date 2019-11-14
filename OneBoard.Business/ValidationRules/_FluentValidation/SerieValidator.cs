@@ -12,10 +12,7 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
         {
            // RuleFor(s => s.ChartType).SetValidator(new ChartTypeValidator());
            // RuleFor(s => s.DataSource).SetValidator(new DataSourceValidator());
-           // RuleFor(s => s.Widget).SetValidator(new WidgetValidator());
-
-
-            
+           // RuleFor(s => s.Widget).SetValidator(new WidgetValidator());          
 
         }
     }

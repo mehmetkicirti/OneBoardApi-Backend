@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace OneBoard.Business.ValidationRules.Model
+namespace OneBoard.Business.ValidationRules.ValidatorModels
 {
     public static class SqlCommandValidator
     {
@@ -31,7 +31,7 @@ namespace OneBoard.Business.ValidationRules.Model
         }
 
 
-
+        #region unnecessary sqlRegexValidation
 
 
         //    public static bool TruncateSqlCommandValidatorByRegex(string input, string pattern = "TRUNCATE")
@@ -120,6 +120,7 @@ namespace OneBoard.Business.ValidationRules.Model
         //        return SqlCommandValidatorByRegex(input);
         //    }
 
+        #endregion
 
     }
 }

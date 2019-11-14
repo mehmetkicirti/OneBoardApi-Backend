@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using OneBoard.Entities.Concrete;
-using System.Text.RegularExpressions;
-using OneBoard.Business.ValidationRules.Model;
+using OneBoard.Business.ValidationRules.ValidatorModels;
 
 namespace OneBoard.Business.ValidationRules._FluentValidation
 {
