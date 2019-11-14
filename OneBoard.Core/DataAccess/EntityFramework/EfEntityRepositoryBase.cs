@@ -130,7 +130,7 @@ namespace OneBoard.Core.DataAccess.EntityFramework
             using (var _context = new TContext())
             {
                 await _context.AddAsync<TEntity>(entity);
-                //await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
         }
         public async Task<IEnumerable<TEntity>> ListAsync()

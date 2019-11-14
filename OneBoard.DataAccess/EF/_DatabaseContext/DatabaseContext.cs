@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OneBoard.Entities.Concrete;
+using OneBoard.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace OneBoard.DataAccess.EF._DatabaseContext
         }
         public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
         {
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,6 +27,34 @@ namespace OneBoard.DataAccess.EF._DatabaseContext
             optionsBuilder.UseSqlServer(connectionString: @"Data Source=DESKTOP-BFT7NEM\SQLEXPRESS;Database=OneBoardV2;Trusted_Connection=true");
             //SECOND H SQL SERVER CONFİG
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<WidgetType>()
+            //    .Property(p => p.WidgetTypeName)
+            //    .HasConversion<string>
+            //    (
+            //        p => (WidgetTypeEnum)Enum.Parse(typeof(WidgetTypeEnum),)
+            //    );
+
+
+            //modelBuilder.Entity<WidgetType>()
+            //    .Property(w => w.WidgetTypeName)
+            //    .HasConversion<string>();
+
+            //modelBuilder.Entity<DataSourceType>()
+            //    .Property(d => d.DataSourceTypeName)
+            //    .HasConversion<string>();
+
+
+            //modelBuilder.Entity<ChartType>()
+            //    .Property(c => c.CharTypeName)
+            //    .HasConversion<string>();
+                
+
+
+        }
+
         //public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
         //{
         //}
