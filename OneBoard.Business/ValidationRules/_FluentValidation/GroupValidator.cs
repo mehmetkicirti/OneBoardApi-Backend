@@ -7,19 +7,21 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
     {
         public GroupValidator()
         {
-            RuleFor(g => g.Firm)
-                .SetValidator(new FirmValidator());
+           // RuleFor(g => g.Firm)
+               // .SetValidator(new FirmValidator());
 
-            //RuleFor(g=>g.UserGroups)
-                //.SetValidator(new User)
+           // RuleForEach(g => g.UserGroups)
+              //  .SetValidator(new UserGroupValidator());
 
-
+            
 
             RuleFor(g => g.GroupName)
                 .NotNull()
-                .Must(groupname => groupname.Contains("Grup") | groupname.Contains("Holding"))
                 .MinimumLength(3)
-                .WithMessage("Error");
+                .MaximumLength(70);
+
+            
+                
 
 
         }

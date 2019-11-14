@@ -1,22 +1,19 @@
 ﻿using FluentValidation;
 using OneBoard.Entities.Concrete;
 using System.Text.RegularExpressions;
+using OneBoard.Business.ValidationRules.Model;
 
 namespace OneBoard.Business.ValidationRules._FluentValidation
 {
     public class UserValidator:AbstractValidator<User>
     {
-        Regex rName = new Regex(@"^[a-zA-Z]*$");
-        Regex rPassword = new Regex(@"^[A-Z]*$");
-        
-
         public UserValidator()
         {
             RuleFor(u => u.UserName).NotEmpty().WithMessage("UserName never cannot be empty")
                 .Length(2, 90).WithMessage("User name should be between 2 and 90 character.")
                 .Custom((name,context)=>
                 {
-                    if (rName.IsMatch(name))
+                    if (CommonValidator.NameValidatorByRegex(name))
                     {
                         context.AddFailure("User name should not take any number value");
                     }
@@ -36,7 +33,7 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
                 var arr = pwd.ToCharArray();
                 foreach (char item in arr)
                 {
-                    if (rPassword.IsMatch(item.ToString()))
+                    if (CommonValidator.PasswordValidatorByRegex(item.ToString()))
                     {
                         context.AddFailure("Password at least 1 upper character.");
                     }

@@ -15,7 +15,7 @@ using OneBoard.Entities.Mapping.DataSourceMap;
 
 namespace OneBoard.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DataSourceController : ControllerBase

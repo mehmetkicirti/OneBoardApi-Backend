@@ -10,11 +10,22 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
        {
             RuleFor(f => f.FirmName)
                 .MinimumLength(3)
+                .MaximumLength(80)
                 .NotNull()
-                .NotEmpty()
-                .WithMessage("Error");
+                .NotEmpty();
+                
+                
 
-            //RuleFor(f => f.Groups).SetValidator(new GroupValidator())
+           // RuleForEach(f => f.Groups)
+               // .SetValidator(new GroupValidator());
+
+           // RuleForEach(f => f.Dashboards).SetValidator(new DashboardValidator());
+
+           // RuleForEach(f => f.UserFirms).SetValidator(new UserFirmValidator());
+
+          
+
+
                 
 
         }
