@@ -38,7 +38,7 @@ namespace OneBoard.Business.Concrete
             try
             {
                 await _dal.AddUserAsync(user);
-                user.UserType = (int)UserTypes.NormalUser;
+                user.isManager = true;
                 user.Password = EncryptionPassword.Encrypt(user.Password);
                 await _unitOfWork.CompleteAsync();
                 return new SuccessResult(BasicCrudOperationMessages.SUCCESS_ADD);

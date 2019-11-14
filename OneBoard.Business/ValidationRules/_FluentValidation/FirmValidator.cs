@@ -11,7 +11,6 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
             RuleFor(f => f.FirmName).Must(f => f.StartsWith("K")).NotNull()
                 .NotEqual("Koç").WithMessage(ValidationMessages.StartsWith + "\n"
                 + ValidationMessages.NotNull + "\n" + ValidationMessages.NotEqual);
-
         }
     }
 }
