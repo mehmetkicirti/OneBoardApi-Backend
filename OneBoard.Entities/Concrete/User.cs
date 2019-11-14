@@ -14,7 +14,9 @@ namespace OneBoard.Entities.Concrete
         [Required()]
         public string Password { get; set; }
         public DateTime LastLogin { get; set; }
-        public int UserType{ get; set; }
+        public bool isAdmin { get; set; }
+        public bool isManager { get; set; }
+        public bool isDesigner { get; set; }
         public string RefreshToken { get; set; }
         public DateTime? RefreshTokenEndDate { get; set; }
         public IEnumerable<UserFirm> UserFirms { get; set; }

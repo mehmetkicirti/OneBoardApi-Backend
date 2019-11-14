@@ -8,6 +8,7 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
     {
        public FirmValidator()
        {
+<<<<<<< HEAD
             RuleFor(f => f.FirmName)
                 .MinimumLength(3)
                 .MaximumLength(80)
@@ -28,6 +29,11 @@ namespace OneBoard.Business.ValidationRules._FluentValidation
 
                 
 
+=======
+            RuleFor(f => f.FirmName).Must(f => f.StartsWith("K")).NotNull()
+                .NotEqual("Koç").WithMessage(ValidationMessages.StartsWith + "\n"
+                + ValidationMessages.NotNull + "\n" + ValidationMessages.NotEqual);
+>>>>>>> 89441039f06f03fd1dbe70325c90970fefc607bf
         }
     }
 }
